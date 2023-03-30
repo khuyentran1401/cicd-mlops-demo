@@ -1,0 +1,96 @@
+schema: '2.0'
+stages:
+  process:
+    cmd: python src/process_data.py
+    deps:
+    - path: data/raw
+      md5: 3ab2fa89af88fa75de21542ec710c4ba.dir
+      size: 222379
+      nfiles: 2
+    - path: src/process_data.py
+      md5: 3e14a3df135fa83ffb3d17bd48ee51a0
+      size: 2788
+    params:
+      params.yaml:
+        data:
+          raw: data/raw/marketing_campaign.csv
+          intermediate: data/intermediate/scaled_features.pkl
+          final: data/final/segmented.pkl
+        process:
+          name: process_2
+          keep_columns:
+          - Income
+          - Recency
+          - NumWebVisitsMonth
+          - Complain
+          - age
+          - total_purchases
+          - enrollment_years
+          - family_size
+          remove_outliers_threshold:
+            age: 90
+            Income: 600000
+          encode:
+            family_size:
+              Married: 2
+              Together: 2
+              Absurd: 1
+              Widow: 1
+              YOLO: 1
+              Divorced: 1
+              Single: 1
+              Alone: 1
+    outs:
+    - path: data/intermediate
+      md5: f3a28e1bb8c80abc370dfb59e11af4a0.dir
+      size: 142368
+      nfiles: 1
+    - path: scaler
+      md5: 2a77a8b27af167f7cc0c045c483cfdc2.dir
+      size: 1239
+      nfiles: 1
+  train:
+    cmd: python src/segment.py
+    deps:
+    - path: data/intermediate
+      md5: f3a28e1bb8c80abc370dfb59e11af4a0.dir
+      size: 142368
+      nfiles: 1
+    - path: src/segment.py
+      md5: c2ed71e8a069ef1954d13a2df226ddff
+      size: 3369
+    params:
+      params.yaml:
+        data:
+          raw: data/raw/marketing_campaign.csv
+          intermediate: data/intermediate/scaled_features.pkl
+          final: data/final/segmented.pkl
+        image:
+          elbow: image/elbow.png
+          clusters: image/cluster.png
+        model: model/kmeans.pkl
+        pca:
+          n_components: 3
+          columns:
+          - col1
+          - col2
+          - col3
+        scaler: scaler/standard_scaler.pkl
+        segment:
+          algorithm: KMeans
+          args:
+            n_clusters: 8
+            n_init: auto
+    outs:
+    - path: data/final
+      md5: 9120e00ba38fa7d2d5bf6a36dcbadc4c.dir
+      size: 151309
+      nfiles: 1
+    - path: image
+      md5: 8fe9fe427c374c81221d746a6de90bf5.dir
+      size: 205084
+      nfiles: 2
+    - path: model
+      md5: f10b8e52556d2e1eb84c8a6c60e2e7e7.dir
+      size: 1717
+      nfiles: 1

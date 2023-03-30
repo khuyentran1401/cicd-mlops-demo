@@ -4,3 +4,4 @@ outputs
 /scaler
 __pycache__
 /model
+/image

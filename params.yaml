@@ -1,0 +1,45 @@
+process:
+  name: process_2
+  keep_columns:
+  - Income
+  - Recency
+  - NumWebVisitsMonth
+  - Complain
+  - age
+  - total_purchases
+  - enrollment_years
+  - family_size
+  remove_outliers_threshold:
+    age: 90
+    Income: 600000
+  encode:
+    family_size:
+      Married: 2
+      Together: 2
+      Absurd: 1
+      Widow: 1
+      YOLO: 1
+      Divorced: 1
+      Single: 1
+      Alone: 1
+segment:
+  algorithm: KMeans
+  args:
+    n_clusters: 8
+    n_init: auto
+data:
+  raw: data/raw/marketing_campaign.csv
+  intermediate: data/intermediate/scaled_features.pkl
+  final: data/final/segmented.pkl
+scaler: scaler/standard_scaler.pkl
+model: model/kmeans.pkl
+elbow_metric: silhouette
+image:
+  elbow: image/elbow.png
+  clusters: image/cluster.png
+pca:
+  n_components: 3
+  columns:
+  - col1
+  - col2
+  - col3

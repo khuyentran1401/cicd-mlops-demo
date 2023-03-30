@@ -1,0 +1,28 @@
+stages:
+  process:
+    cmd: python src/process_data.py
+    deps:
+    - data/raw
+    - src/process_data.py
+    params:
+    - process
+    - data
+    outs:
+    - data/intermediate
+    - scaler
+  train:
+    cmd: python src/segment.py
+    deps:
+    - data/intermediate
+    - src/segment.py
+    params:
+    - data
+    - image
+    - model
+    - pca
+    - scaler
+    - segment
+    outs:
+    - data/final
+    - image
+    - model
