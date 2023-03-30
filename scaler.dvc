@@ -1,0 +1,5 @@
+outs:
+- md5: 2a77a8b27af167f7cc0c045c483cfdc2.dir
+  size: 1239
+  nfiles: 1
+  path: scaler

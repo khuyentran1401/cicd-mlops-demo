@@ -1,3 +1,4 @@
 algorithm: KMeans
 args:
   n_clusters: 8
+  n_init: auto

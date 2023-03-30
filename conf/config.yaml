@@ -1,38 +1,25 @@
-hydra:  
-  output_subdir: null  
-  run:  
-    dir: .
-    
 defaults:
   - process: process_2
   - segment: KMeans
   - _self_
 
-raw_data: 
-  path: data/raw/marketing_campaign.csv
-
-intermediate:
-  dir: data/intermediate
-  name: scale_features.csv
-  path: ${intermediate.dir}/${intermediate.name}
-
-segmented:
-  dir: data/final
-  name: segmented.csv
-  path: ${segmented.dir}/${segmented.name}
-
-flow: all 
-
-pca:
-  n_components: 3
-  columns:
-  - col1
-  - col2
-  - col3
+data:
+  raw: data/raw/marketing_campaign.csv
+  intermediate: data/intermediate/scaled_features.pkl
+  final: data/final/segmented.pkl
 
 scaler: scaler/standard_scaler.pkl
+model: model/kmeans.pkl
+
 elbow_metric: silhouette
 
 image:
   elbow: image/elbow.png
   clusters: image/cluster.png
+
+pca:
+  n_components: 3
+  columns:
+    - col1
+    - col2
+    - col3

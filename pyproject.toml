@@ -14,6 +14,7 @@ scikit-learn = "^1.2.2"
 dvc = "^2.51.0"
 pre-commit = "^3.2.1"
 dvc-s3 = "^2.21.0"
+yellowbrick = "^1.5"
 
 
 [tool.poetry.group.dev.dependencies]

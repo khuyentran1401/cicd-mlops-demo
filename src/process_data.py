@@ -3,14 +3,11 @@ from pathlib import Path
 import hydra
 import joblib
 import pandas as pd
+from hydra.utils import to_absolute_path as abs
 from omegaconf import DictConfig
 from sklearn.preprocessing import StandardScaler
 
-from helper import save_data
-
-
-def load_data(data_name: str) -> pd.DataFrame:
-    return pd.read_csv(data_name)
+from helper import load_data, save_data
 
 
 def drop_na(df: pd.DataFrame) -> pd.DataFrame:
@@ -72,6 +69,7 @@ def get_scaler(df: pd.DataFrame):
 
 
 def save_scaler(scaler: StandardScaler, path: str):
+    path = abs(path)
     Path(path).parent.mkdir(exist_ok=True)
     joblib.dump(scaler, path)
 
@@ -80,13 +78,9 @@ def scale_features(df: pd.DataFrame, scaler: StandardScaler):
     return pd.DataFrame(scaler.transform(df), columns=df.columns)
 
 
-@hydra.main(
-    version_base=None,
-    config_path="../conf",
-    config_name="config",
-)
+@hydra.main(version_base=None, config_path="../conf", config_name="config")
 def process_data(config: DictConfig):
-    df = load_data(config.raw_data.path)
+    df = load_data(config.data.raw)
     df = drop_na(df)
     df = get_age(df)
     df = get_total_children(df)
@@ -100,7 +94,7 @@ def process_data(config: DictConfig):
     )
     scaler = get_scaler(df)
     df = scale_features(df, scaler)
-    save_data(df, config.intermediate.path)
+    save_data(df, config.data.intermediate)
     save_scaler(scaler, config.scaler)
 
 
