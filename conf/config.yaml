@@ -30,10 +30,9 @@ pca:
   - col2
   - col3
 
+scaler: scaler/standard_scaler.pkl
 elbow_metric: silhouette
 
 image:
   elbow: image/elbow.png
   clusters: image/cluster.png
-
-wandb_mode: 

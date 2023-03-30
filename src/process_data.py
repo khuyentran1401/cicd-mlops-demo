@@ -1,55 +1,40 @@
-from datetime import timedelta
+from pathlib import Path
 
 import hydra
+import joblib
 import pandas as pd
-import wandb
 from omegaconf import DictConfig
-from prefect import Flow, Parameter, task
-from prefect.engine.results import LocalResult
-from prefect.engine.serializers import PandasSerializer
 from sklearn.preprocessing import StandardScaler
 
-INTERMEDIATE_OUTPUT = LocalResult(
-    "data/intermediate/",
-    location="{task_name}.csv",
-    serializer=PandasSerializer("csv", serialize_kwargs={"index": False}),
-)
+from helper import save_data
 
 
-@task
 def load_data(data_name: str) -> pd.DataFrame:
-    data = pd.read_csv(data_name)
-    return data
+    return pd.read_csv(data_name)
 
 
-@task
 def drop_na(df: pd.DataFrame) -> pd.DataFrame:
     return df.dropna()
 
 
-@task
 def get_age(df: pd.DataFrame) -> pd.DataFrame:
-    return df.assign(age=df["Year_Birth"].apply(lambda row: 2021 - row))
+    return df.assign(age=2021 - df["Year_Birth"])
 
 
-@task
 def get_total_children(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(total_children=df["Kidhome"] + df["Teenhome"])
 
 
-@task
 def get_total_purchases(df: pd.DataFrame) -> pd.DataFrame:
     purchases_columns = df.filter(like="Purchases", axis=1).columns
     return df.assign(total_purchases=df[purchases_columns].sum(axis=1))
 
 
-@task
 def get_enrollment_years(df: pd.DataFrame) -> pd.DataFrame:
-    df["Dt_Customer"] = pd.to_datetime(df["Dt_Customer"])
+    df["Dt_Customer"] = pd.to_datetime(df["Dt_Customer"], format="%d-%m-%Y")
     return df.assign(enrollment_years=2022 - df["Dt_Customer"].dt.year)
 
 
-@task
 def get_family_size(df: pd.DataFrame, size_map: dict) -> pd.DataFrame:
     return df.assign(
         family_size=df["Marital_Status"].map(size_map) + df["total_children"]
@@ -67,9 +52,10 @@ def drop_outliers(df: pd.DataFrame, column_threshold: dict):
     return df.reset_index(drop=True)
 
 
-@task(result=INTERMEDIATE_OUTPUT)
 def drop_columns_and_rows(
-    df: pd.DataFrame, keep_columns: DictConfig, remove_outliers_threshold: DictConfig
+    df: pd.DataFrame,
+    keep_columns: DictConfig,
+    remove_outliers_threshold: DictConfig,
 ) -> pd.DataFrame:
     df = df.pipe(drop_features, keep_columns=keep_columns).pipe(
         drop_outliers, column_threshold=remove_outliers_threshold
@@ -78,7 +64,6 @@ def drop_columns_and_rows(
     return df
 
 
-@task(result=LocalResult("processors", location="scaler.pkl"))
 def get_scaler(df: pd.DataFrame):
     scaler = StandardScaler()
     scaler.fit(df)
@@ -86,33 +71,37 @@ def get_scaler(df: pd.DataFrame):
     return scaler
 
 
-@task(result=INTERMEDIATE_OUTPUT)
+def save_scaler(scaler: StandardScaler, path: str):
+    Path(path).parent.mkdir(exist_ok=True)
+    joblib.dump(scaler, path)
+
+
 def scale_features(df: pd.DataFrame, scaler: StandardScaler):
     return pd.DataFrame(scaler.transform(df), columns=df.columns)
 
 
 @hydra.main(
-    config_path="../config",
-    config_name="main",
+    version_base=None,
+    config_path="../conf",
+    config_name="config",
 )
 def process_data(config: DictConfig):
-
-    with Flow("process_data") as flow:
-        df = load_data(config.raw_data.path)
-        df = drop_na(df)
-        df = get_age(df)
-        df = get_total_children(df)
-        df = get_total_purchases(df)
-        df = get_enrollment_years(df)
-        df = get_family_size(df, config.process.encode.family_size)
-        df = drop_columns_and_rows(
-            df, config.process.keep_columns, config.process.remove_outliers_threshold
-        )
-        scaler = get_scaler(df)
-        df = scale_features(df, scaler)
-
-    flow.run()
-    # flow.register(project_name="customer_segmentation")
+    df = load_data(config.raw_data.path)
+    df = drop_na(df)
+    df = get_age(df)
+    df = get_total_children(df)
+    df = get_total_purchases(df)
+    df = get_enrollment_years(df)
+    df = get_family_size(df, config.process.encode.family_size)
+    df = drop_columns_and_rows(
+        df,
+        config.process.keep_columns,
+        config.process.remove_outliers_threshold,
+    )
+    scaler = get_scaler(df)
+    df = scale_features(df, scaler)
+    save_data(df, config.intermediate.path)
+    save_scaler(scaler, config.scaler)
 
 
 if __name__ == "__main__":

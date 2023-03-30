@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "ci-cd-mlops"
+version = "0.1.0"
+description = ""
+authors = ["khuyentran1401 <khuyentran1476@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ci_cd_mlops"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.5.3"
+hydra-core = "^1.3.2"
+scikit-learn = "^1.2.2"
+dvc = "^2.51.0"
+pre-commit = "^3.2.1"
+dvc-s3 = "^2.21.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+	\.git
+| \.hg
+| \.mypy_cache
+| \.tox
+| \.venv
+| _build
+| buck-out
+| build   
+)/ 
+'''

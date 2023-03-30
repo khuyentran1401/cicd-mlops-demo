@@ -1,0 +1,2 @@
+['remote "raw"']
+    url = s3://customer-segmentation-1/raw/
