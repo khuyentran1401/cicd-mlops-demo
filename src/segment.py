@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from yellowbrick.cluster import KElbowVisualizer
 
-from helper import load_data, profile_data, save_data
+from helper import load_data, save_data
 
 
 def get_pca_model(data: pd.DataFrame) -> PCA:
@@ -63,7 +63,6 @@ def save_model(model, path: str):
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def segment(config: DictConfig) -> None:
     data = load_data(config.data.scaled)
-    profile_data(data, name="scaled")
     pca = get_pca_model(data)
     pca_df = reduce_dimension(data, pca)
 

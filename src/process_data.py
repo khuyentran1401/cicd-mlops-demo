@@ -7,7 +7,7 @@ from hydra.utils import to_absolute_path as abs
 from omegaconf import DictConfig
 from sklearn.preprocessing import StandardScaler
 
-from helper import load_data, profile_data, save_data
+from helper import load_data, save_data
 
 
 def drop_na(df: pd.DataFrame) -> pd.DataFrame:
@@ -81,7 +81,6 @@ def scale_features(df: pd.DataFrame, scaler: StandardScaler):
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def process_data(config: DictConfig):
     df = load_data(config.data.raw)
-    profile_data(df, name="raw")
     df = drop_na(df)
     df = get_age(df)
     df = get_total_children(df)
