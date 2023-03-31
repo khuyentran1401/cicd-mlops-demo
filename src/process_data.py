@@ -7,11 +7,11 @@ from hydra.utils import to_absolute_path as abs
 from omegaconf import DictConfig
 from sklearn.preprocessing import StandardScaler
 
-from helper import load_data, save_data
+from helper import load_data, profile_data, save_data
 
 
 def drop_na(df: pd.DataFrame) -> pd.DataFrame:
-    return df.dropna()
+    return df.dropna().reset_index(drop=True)
 
 
 def get_age(df: pd.DataFrame) -> pd.DataFrame:
@@ -32,7 +32,7 @@ def get_enrollment_years(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(enrollment_years=2022 - df["Dt_Customer"].dt.year)
 
 
-def get_family_size(df: pd.DataFrame, size_map: dict) -> pd.DataFrame:
+def get_family_size(df: pd.DataFrame, size_map: DictConfig) -> pd.DataFrame:
     return df.assign(
         family_size=df["Marital_Status"].map(size_map) + df["total_children"]
     )
@@ -43,7 +43,7 @@ def drop_features(df: pd.DataFrame, keep_columns: list):
     return df
 
 
-def drop_outliers(df: pd.DataFrame, column_threshold: dict):
+def drop_outliers(df: pd.DataFrame, column_threshold: DictConfig):
     for col, threshold in column_threshold.items():
         df = df[df[col] < threshold]
     return df.reset_index(drop=True)
@@ -81,6 +81,7 @@ def scale_features(df: pd.DataFrame, scaler: StandardScaler):
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def process_data(config: DictConfig):
     df = load_data(config.data.raw)
+    profile_data(df, name="raw")
     df = drop_na(df)
     df = get_age(df)
     df = get_total_children(df)
