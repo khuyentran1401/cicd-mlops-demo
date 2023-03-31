@@ -15,6 +15,7 @@ dvc = "^2.51.0"
 pre-commit = "^3.2.1"
 dvc-s3 = "^2.21.0"
 yellowbrick = "^1.5"
+dvclive = "^2.5.1"
 
 
 [tool.poetry.group.dev.dependencies]

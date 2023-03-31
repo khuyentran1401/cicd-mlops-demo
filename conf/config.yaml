@@ -5,8 +5,9 @@ defaults:
 
 data:
   raw: data/raw/marketing_campaign.csv
-  intermediate: data/intermediate/scaled_features.pkl
-  final: data/final/segmented.pkl
+  scaled: data/intermediate/scaled_data.pkl
+  pca: data/intermediate/pca_data.pkl 
+  final: data/final/segmented_data.pkl
 
 scaler: scaler/standard_scaler.pkl
 model: model/kmeans.pkl

@@ -94,7 +94,7 @@ def process_data(config: DictConfig):
     )
     scaler = get_scaler(df)
     df = scale_features(df, scaler)
-    save_data(df, config.data.intermediate)
+    save_data(df, config.data.scaled)
     save_scaler(scaler, config.scaler)
 
 

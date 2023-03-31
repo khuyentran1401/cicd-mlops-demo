@@ -1,0 +1,5 @@
+metrics:
+- metrics.json
+plots:
+- plots/metrics:
+    x: step

@@ -5,3 +5,4 @@ outputs
 __pycache__
 /model
 /image
+/metrics

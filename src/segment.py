@@ -4,13 +4,10 @@ from typing import Tuple
 import hydra
 import joblib
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 from hydra.utils import to_absolute_path as abs
-from omegaconf import DictConfig, OmegaConf
-from sklearn.cluster import (DBSCAN, OPTICS, AffinityPropagation,
-                             AgglomerativeClustering, Birch, KMeans, MeanShift,
-                             SpectralClustering)
+from omegaconf import DictConfig
+from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from yellowbrick.cluster import KElbowVisualizer
 
@@ -27,13 +24,8 @@ def reduce_dimension(df: pd.DataFrame, pca: PCA) -> pd.DataFrame:
     return pd.DataFrame(pca.transform(df), columns=["col1", "col2", "col3"])
 
 
-def get_3d_projection(pca_df: pd.DataFrame) -> dict:
-    """A 3D Projection Of Data In The Reduced Dimensionality Space"""
-    return {"x": pca_df["col1"], "y": pca_df["col2"], "z": pca_df["col3"]}
-
-
-def get_best_k_cluster(
-    pca_df: pd.DataFrame, image_path: str, elbow_metric: str
+def compare_k_clusters(
+    pca_df: pd.DataFrame, elbow_metric: str
 ) -> pd.DataFrame:
     fig = plt.figure(figsize=(10, 8))
     fig.add_subplot(111)
@@ -41,55 +33,25 @@ def get_best_k_cluster(
     elbow = KElbowVisualizer(KMeans(n_init="auto"), metric=elbow_metric)
     elbow.fit(pca_df)
 
+    return elbow
+
+
+def save_elbow_image(elbow: KElbowVisualizer, image_path: str):
     path = abs(image_path)
     Path(path).parent.mkdir(exist_ok=True)
     elbow.fig.savefig(image_path)
 
-    return elbow.elbow_value_
 
-
-def predict(
-    pca_df: pd.DataFrame, k: int, model: dict
+def get_kmeans_model(
+    pca_df: pd.DataFrame, elbow: KElbowVisualizer, model_params: dict
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    model_args = dict(model.args)
-    model_args["n_clusters"] = k
+    model_args = dict(model_params.args)
+    model_args["n_clusters"] = elbow.elbow_value_
 
     model = KMeans(**model_args)
 
-    # Predict
-    return model.fit_predict(pca_df)
-
-
-def inverse_scale(df: pd.DataFrame, scaled_path: str):
-    scaler = joblib.load(scaled_path)
-    return pd.DataFrame(scaler.inverse_transform(df), columns=df.columns)
-
-
-def insert_clusters_to_df(
-    df: pd.DataFrame, clusters: np.ndarray
-) -> pd.DataFrame:
-    return df.assign(clusters=clusters)
-
-
-def plot_clusters(
-    pca_df: pd.DataFrame, preds: np.ndarray, projections: dict, image_path: str
-) -> None:
-    pca_df["clusters"] = preds
-
-    plt.figure(figsize=(10, 8))
-    ax = plt.subplot(111, projection="3d")
-    ax.set_title("the plot of the clusters")
-    ax.scatter(
-        projections["x"],
-        projections["y"],
-        projections["z"],
-        s=40,
-        c=pca_df["clusters"],
-        marker="o",
-        cmap="Accent",
-    )
-    path = abs(image_path)
-    plt.savefig(path)
+    # Fit
+    return model.fit(pca_df)
 
 
 def save_model(model, path: str):
@@ -100,22 +62,16 @@ def save_model(model, path: str):
 
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def segment(config: DictConfig) -> None:
-    data = load_data(config.data.intermediate)
+    data = load_data(config.data.scaled)
     pca = get_pca_model(data)
     pca_df = reduce_dimension(data, pca)
 
-    projections = get_3d_projection(pca_df)
+    elbow = compare_k_clusters(pca_df, config.elbow_metric)
 
-    k_best = get_best_k_cluster(
-        pca_df, config.image.elbow, config.elbow_metric
-    )
-    prediction = predict(pca_df, k_best, config.segment)
-
-    inversed_scaled = inverse_scale(data, config.scaler)
-    added_clusters = insert_clusters_to_df(inversed_scaled, prediction)
-    save_data(added_clusters, config.data.final)
-    save_model(pca, config.model)
-    plot_clusters(pca_df, prediction, projections, config.image.clusters)
+    save_elbow_image(elbow, config.image.elbow)
+    kmeans = get_kmeans_model(pca_df, elbow, config.segment)
+    save_data(pca_df, config.data.pca)
+    save_model(kmeans, config.model)
 
 
 if __name__ == "__main__":

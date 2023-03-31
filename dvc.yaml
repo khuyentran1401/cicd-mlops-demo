@@ -8,21 +8,35 @@ stages:
     - process
     - data
     outs:
-    - data/intermediate
+    - data/intermediate/scaled_data.pkl
     - scaler
   train:
     cmd: python src/segment.py
     deps:
-    - data/intermediate
+    - data/intermediate/scaled_data.pkl
     - src/segment.py
     params:
     - data
-    - image
     - model
     - pca
     - scaler
     - segment
     outs:
-    - data/final
+    - data/intermediate/pca_data.pkl
+    - image/elbow.png
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - data/intermediate
+    - scaler
+    - src/evaluate.py
+    params:
+    - data
     - image
     - model
+    - scaler
+    outs:
+    - data/final
+    - image/cluster.png
+    metrics:
+    - dvclive/metrics.json
