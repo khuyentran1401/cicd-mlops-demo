@@ -1,5 +1,6 @@
 [core]
     autostage = true
+    remote = write
 [hydra]
     enabled = True
 ['remote "write"']
