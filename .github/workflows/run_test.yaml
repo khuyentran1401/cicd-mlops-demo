@@ -2,9 +2,10 @@ name: Test code and app
 on:
   pull_request:
     paths:
+      - conf/**
       - src/**
       - tests/**
-      - .github/workflows/run_test.yaml
+      
 jobs:
   test_model:
     name: Test processed code and model
