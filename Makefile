@@ -8,7 +8,7 @@ install:
 
 pull_data:
 	@echo "Pulling data..."
-	dvc pull -r write
+	dvc pull -r read
 
 setup: install pull_data
 
