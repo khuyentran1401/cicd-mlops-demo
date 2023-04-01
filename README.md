@@ -5,17 +5,15 @@ This is a sample project that showcases how to use CI for machine learning model
 ## Why?
 Continuous Integration (CI) is the practice of continuously merging and testing code changes into a shared repository. In a machine learning project, CI can be very useful for several reasons:
 
-Catching errors early: With CI, any changes made to the codebase are automatically built and tested, which helps catch any errors early in the development cycle. This is especially important in machine learning projects since models can be complex, and errors can be hard to spot.
+- Catching errors early: With CI, any changes made to the codebase are automatically built and tested, which helps catch any errors early in the development cycle. This is especially important in machine learning projects since models can be complex, and errors can be hard to spot.
 
-Ensuring reproducibility: With CI, you can ensure that the codebase is always in a reproducible state. This means that anyone can run the code at any time and get the same results. This is important in machine learning projects because reproducibility is essential for scientific research.
+- Ensuring reproducibility: With CI, you can ensure that the codebase is always in a reproducible state. This means that anyone can run the code at any time and get the same results. This is important in machine learning projects because reproducibility is essential for scientific research.
 
-Facilitating collaboration: With CI, everyone on the team is working with the same codebase, and everyone can see changes made by other team members. This can help prevent conflicts and facilitate collaboration.
+- Facilitating collaboration: With CI, everyone on the team is working with the same codebase, and everyone can see changes made by other team members. This can help prevent conflicts and facilitate collaboration.
 
-Automating tests: CI tools can automatically run tests on the codebase, ensuring that everything is working as expected. This can help catch errors that might otherwise go unnoticed.
+- Automating tests: CI tools can automatically run tests on the codebase, ensuring that everything is working as expected. This can help catch errors that might otherwise go unnoticed.
 
-Ensuring scalability: Machine learning projects often involve large datasets and complex models. With CI, you can ensure that the codebase is scalable and can handle large datasets and models.
-
-In summary, continuous integration is useful in a machine learning project because it helps catch errors early, ensures reproducibility, facilitates collaboration, automates tests, and ensures scalability.
+- Ensuring scalability: Machine learning projects often involve large datasets and complex models. With CI, you can ensure that the codebase is scalable and can handle large datasets and models.
 
 ## Scenario
 - Data scientists make some changes to the code and create a new model locally
