@@ -81,19 +81,19 @@ stages:
         k: 2
     outs:
     - path: data/intermediate/pca_data.pkl
-      md5: b21541065675071b74df019a8c4b42b3
+      md5: 6dda837956085775084a09120326acca
       size: 53793
     - path: image/elbow.png
-      md5: a692ecb80c4c46bbbed276ab6247e790
-      size: 52179
+      md5: 06f1a2dac6b41e153a61cab4acde2865
+      size: 55954
     - path: model/kmeans.pkl
-      md5: b1e8264846d77cf44b0f00c52de79cc1
+      md5: 674b983840610879e186ceb5a36024ae
       size: 10007
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: data/intermediate
-      md5: 1a504aa8d6254385fae2855b66f8e80a.dir
+      md5: 2839a4729ee62469f4abbb7977af1545.dir
       size: 196161
       nfiles: 2
     - path: scaler
@@ -117,12 +117,12 @@ stages:
         scaler: scaler/standard_scaler.pkl
     outs:
     - path: data/final
-      md5: b61ae993a9695b926746dda0aad180ae.dir
+      md5: 87002124e2e8adce20884587e74ea6db.dir
       size: 151309
       nfiles: 1
     - path: dvclive/metrics.json
-      md5: 2e91e2f49df73ac266aca2d1e1c47848
-      size: 46
+      md5: a2ec2d0ab294437ba1913c587c60f143
+      size: 45
     - path: image/cluster.png
-      md5: 1c6118436ba2bf2ef5c5d7de4475bd63
-      size: 154073
+      md5: 1040a8a3794e130eb6e139c3be6a4679
+      size: 154080
