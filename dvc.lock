@@ -18,20 +18,18 @@ stages:
           pca: data/intermediate/pca_data.pkl
           final: data/final/segmented_data.pkl
         process:
-          name: process_1
+          name: process_3
           keep_columns:
           - Income
           - Recency
           - NumWebVisitsMonth
-          - AcceptedCmp3
-          - AcceptedCmp4
-          - AcceptedCmp5
-          - AcceptedCmp1
-          - AcceptedCmp2
+          - NumDealsPurchases
+          - NumWebPurchases
+          - NumCatalogPurchases
+          - NumStorePurchases
           - Complain
           - Response
           - age
-          - total_purchases
           - enrollment_years
           - family_size
           remove_outliers_threshold:
@@ -49,18 +47,18 @@ stages:
               Alone: 1
     outs:
     - path: data/intermediate/scaled_data.pkl
-      md5: 61303ec84520707e3cb1e821fe2a4519
-      size: 248630
+      md5: 34f57e63b0ff8d66ef263ab1f342f0e3
+      size: 213225
     - path: scaler
-      md5: 2106afeb9407efe5b5087e35f80b82ba.dir
-      size: 1495
+      md5: 8aecde394cbf7bc4517b00bea66af5ca.dir
+      size: 1415
       nfiles: 1
   train:
     cmd: python src/segment.py
     deps:
     - path: data/intermediate/scaled_data.pkl
-      md5: 61303ec84520707e3cb1e821fe2a4519
-      size: 248630
+      md5: 34f57e63b0ff8d66ef263ab1f342f0e3
+      size: 213225
     - path: src/segment.py
       md5: 28c1e90ba2af4c6fd8cad962bab234e4
       size: 2146
@@ -87,24 +85,24 @@ stages:
         k: 2
     outs:
     - path: data/intermediate/pca_data.pkl
-      md5: b1fe8e053ebf6bdbcd2d3ef22a811b3f
+      md5: 9f826636b63af2c843dd0944b901c9e5
       size: 53793
     - path: image/elbow.png
-      md5: 7a8cd96e3fd6351273eb5223d49532ac
-      size: 64654
+      md5: e5289358bb6a854ac59c75868eeffa2e
+      size: 61117
     - path: model/kmeans.pkl
-      md5: eee8e3ca8f89af1b29314ef1fce40123
+      md5: d0482f156dfe9992f25f5dbb9b669fa4
       size: 10007
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: data/intermediate
-      md5: ecaf0b06bde83a955a63944f737e2dd8.dir
-      size: 302423
+      md5: 6d59ad1d2ab25dcbf62f67aa61602261.dir
+      size: 267018
       nfiles: 2
     - path: scaler
-      md5: 2106afeb9407efe5b5087e35f80b82ba.dir
-      size: 1495
+      md5: 8aecde394cbf7bc4517b00bea66af5ca.dir
+      size: 1415
       nfiles: 1
     - path: src/evaluate.py
       md5: 1ace45e4d3de090ae6df2abb655dbc7f
@@ -123,12 +121,12 @@ stages:
         scaler: scaler/standard_scaler.pkl
     outs:
     - path: data/final
-      md5: c36abbf80ce282dd5c93e5800027f434.dir
-      size: 257571
+      md5: 209dc45313f4d9fefdcc5ed385dd0092.dir
+      size: 222166
       nfiles: 1
     - path: dvclive/metrics.json
-      md5: a865f5f281b1fd0ae4c9014b876a625f
-      size: 47
+      md5: c7aeed39b81ce26fd293b1e4562cfad4
+      size: 45
     - path: image/cluster.png
-      md5: 19eb46b7811d86535743c02850cec3ed
-      size: 142654
+      md5: 944eacbbf2a720bb197a52c748b5d161
+      size: 148465
