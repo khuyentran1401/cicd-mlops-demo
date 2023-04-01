@@ -1,5 +1,5 @@
 defaults:
-  - process: process_1
+  - process: process_2
   - segment: KMeans
   - _self_
 
