@@ -1,16 +1,18 @@
 process:
-  name: process_3
+  name: process_1
   keep_columns:
   - Income
   - Recency
   - NumWebVisitsMonth
-  - NumDealsPurchases
-  - NumWebPurchases
-  - NumCatalogPurchases
-  - NumStorePurchases
+  - AcceptedCmp3
+  - AcceptedCmp4
+  - AcceptedCmp5
+  - AcceptedCmp1
+  - AcceptedCmp2
   - Complain
   - Response
   - age
+  - total_purchases
   - enrollment_years
   - family_size
   remove_outliers_threshold:
