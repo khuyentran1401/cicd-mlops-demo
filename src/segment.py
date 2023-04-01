@@ -11,6 +11,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from yellowbrick.cluster import KElbowVisualizer
 
+from dvclive import Live
 from helper import load_data, save_data
 
 
@@ -43,10 +44,10 @@ def save_elbow_image(elbow: KElbowVisualizer, image_path: str):
 
 
 def get_kmeans_model(
-    pca_df: pd.DataFrame, elbow: KElbowVisualizer, model_params: dict
+    pca_df: pd.DataFrame, k: int, model_params: dict
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     model_args = dict(model_params.args)
-    model_args["n_clusters"] = elbow.elbow_value_
+    model_args["n_clusters"] = k
 
     model = KMeans(**model_args)
 
@@ -62,16 +63,18 @@ def save_model(model, path: str):
 
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def segment(config: DictConfig) -> None:
-    data = load_data(config.data.scaled)
-    pca = get_pca_model(data)
-    pca_df = reduce_dimension(data, pca)
+    with Live(save_dvc_exp=True) as live:
+        data = load_data(config.data.scaled)
+        pca = get_pca_model(data)
+        pca_df = reduce_dimension(data, pca)
 
-    elbow = compare_k_clusters(pca_df, config.elbow_metric)
+        elbow = compare_k_clusters(pca_df, config.elbow_metric)
 
-    save_elbow_image(elbow, config.image.elbow)
-    kmeans = get_kmeans_model(pca_df, elbow, config.segment)
-    save_data(pca_df, config.data.pca)
-    save_model(kmeans, config.model)
+        save_elbow_image(elbow, config.image.elbow)
+        kmeans = get_kmeans_model(pca_df, elbow.elbow_value_, config.segment)
+        save_data(pca_df, config.data.pca)
+        save_model(kmeans, config.model)
+        live.log_param("k", int(elbow.elbow_value_))
 
 
 if __name__ == "__main__":

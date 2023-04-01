@@ -1,5 +1,2 @@
-metrics:
-- metrics.json
-plots:
-- plots/metrics:
-    x: step
+params:
+- params.yaml

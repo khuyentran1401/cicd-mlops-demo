@@ -64,7 +64,7 @@ def get_silhouette_score(pca_df: pd.DataFrame, kmeans: KMeans, live):
 
 @hydra.main(version_base=None, config_path="../conf", config_name="config")
 def evaluate(config: DictConfig) -> None:
-    with Live(save_dvc_exp=True) as live:
+    with Live(save_dvc_exp=True, resume=True) as live:
         pca_df = load_data(config.data.pca)
         scaled_df = load_data(config.data.scaled)
         kmeans = load_model(config.model)

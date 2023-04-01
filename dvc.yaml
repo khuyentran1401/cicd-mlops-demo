@@ -2,41 +2,43 @@ stages:
   process:
     cmd: python src/process_data.py
     deps:
-    - data/raw
-    - src/process_data.py
+      - data/raw
+      - src/process_data.py
     params:
-    - process
-    - data
+      - process
+      - data
     outs:
-    - data/intermediate/scaled_data.pkl
-    - scaler
+      - data/intermediate/scaled_data.pkl
+      - scaler
   train:
     cmd: python src/segment.py
     deps:
-    - data/intermediate/scaled_data.pkl
-    - src/segment.py
+      - data/intermediate/scaled_data.pkl
+      - src/segment.py
     params:
-    - data
-    - model
-    - pca
-    - scaler
-    - segment
+      - data
+      - model
+      - pca
+      - scaler
+      - segment
+      - dvclive/params.yaml:
+          - k
     outs:
-    - data/intermediate/pca_data.pkl
-    - image/elbow.png
+      - data/intermediate/pca_data.pkl
+      - image/elbow.png
   evaluate:
     cmd: python src/evaluate.py
     deps:
-    - data/intermediate
-    - scaler
-    - src/evaluate.py
+      - data/intermediate
+      - scaler
+      - src/evaluate.py
     params:
-    - data
-    - image
-    - model
-    - scaler
+      - data
+      - image
+      - model
+      - scaler
     outs:
-    - data/final
-    - image/cluster.png
+      - data/final
+      - image/cluster.png
     metrics:
-    - dvclive/metrics.json
+      - dvclive/metrics.json
