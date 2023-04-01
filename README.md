@@ -59,7 +59,7 @@ make activate
 make setup
 ```
 
-Make some some changes to any files in the following directories `src`, `tests`, `conf`. For the sake of demonstration, we will make minor changes the file `conf/config.yaml`:
+Make some some changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `conf/config.yaml`:
 
 ![](demo_images/code_change.png)
 
@@ -68,7 +68,7 @@ Create an experiment:
 dvc exp run
 ```
 
-Add, commit, and push changes:
+Add, commit, and push changes to the repository:
 
 ```bash
 git add .
@@ -76,7 +76,7 @@ git commit -m 'change process_3 to process_1'
 git push origin main
 ```
 
-Create a PR and a GitHub job will run:
+Create a pull request and a GitHub job will be triggered:
 
 ![](demo_images/pr.png)
 
