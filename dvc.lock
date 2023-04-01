@@ -56,7 +56,7 @@ stages:
       md5: 86ec80e2db839ec329ede117cd4f4878
       size: 142368
     - path: src/segment.py
-      md5: bd83d9e4eb8936af6b3e9c7e24db9166
+      md5: 28c1e90ba2af4c6fd8cad962bab234e4
       size: 2146
     params:
       params.yaml:
@@ -81,16 +81,16 @@ stages:
         k: 2
     outs:
     - path: data/intermediate/pca_data.pkl
-      md5: caeb36955205dbad5795d86b3b37570a
+      md5: 5bc07ce6be29cd3b21b8c4d312e3b8a1
       size: 53793
     - path: image/elbow.png
-      md5: 160e311572c5b281829eded4f17459a6
-      size: 60061
+      md5: 081d7df9e0b8416b7e697a510bd83c78
+      size: 54639
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: data/intermediate
-      md5: ed55ed0ae16a22173f32fd03da24d241.dir
+      md5: 190a1c6cf5ea89e3c89c33b67ab8d026.dir
       size: 196161
       nfiles: 2
     - path: scaler
@@ -118,7 +118,7 @@ stages:
       size: 151309
       nfiles: 1
     - path: dvclive/metrics.json
-      md5: afc3920ef139a99f8a41786d9fcfdffb
+      md5: 2e91e2f49df73ac266aca2d1e1c47848
       size: 46
     - path: image/cluster.png
       md5: 1c6118436ba2bf2ef5c5d7de4475bd63

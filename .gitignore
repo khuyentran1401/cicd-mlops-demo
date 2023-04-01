@@ -7,3 +7,5 @@ __pycache__
 /image
 /metrics
 /data_profile
+/.*_cache
+/dvc_plots
