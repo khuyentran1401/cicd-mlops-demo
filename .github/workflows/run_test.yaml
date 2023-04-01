@@ -5,6 +5,7 @@ on:
       - conf/**
       - src/**
       - tests/**
+      - params.yaml
       
 jobs:
   test_model:
