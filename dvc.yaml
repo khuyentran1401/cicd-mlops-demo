@@ -25,6 +25,8 @@ stages:
           - k
     outs:
       - data/intermediate/pca_data.pkl
+      - model/kmeans.pkl
+    plots:
       - image/elbow.png
   evaluate:
     cmd: python src/evaluate.py
@@ -39,6 +41,7 @@ stages:
       - scaler
     outs:
       - data/final
+    plots:
       - image/cluster.png
     metrics:
       - dvclive/metrics.json
