@@ -2,13 +2,7 @@
     autostage = true
 [hydra]
     enabled = True
-['remote "raw"']
-    url = https://customer-segmentation-1.s3.amazonaws.com/raw/
-['remote "scaler"']
-    url = s3://customer-segmentation-1/intermediate/scaler/
-['remote "scaled_data"']
-    url = s3://customer-segmentation-1/intermediate/scaled_data/
-['remote "pca_data"']
-    url = s3://customer-segmentation-1/intermediate/pca_data/
-['remote "model"']
-    url = s3://customer-segmentation-1/final/model/
+['remote "write"']
+    url = s3://customer-segmentation-1/
+['remote "read"']
+    url = https://customer-segmentation-1.s3.amazonaws.com/
