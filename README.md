@@ -50,11 +50,11 @@ Next, setup the environment by following these steps:
 1. Install [Poetry](https://python-poetry.org/docs/#installation)
 2. Set up the environment:
 ```bash
-# activate the virtual environment
-make activate
+# Install dependencies
+poetry install
 
-# install dependencies and pull data from the remote storage 
-make setup
+# Pull data from the remote storage 
+make data
 ```
 
 Make some some changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `conf/config.yaml`:
@@ -63,7 +63,7 @@ Make some some changes to any files in the following directories `src`, `tests`,
 
 Create an experiment:
 ```bash
-dvc exp run
+make experiment
 ```
 
 Add, commit, and push changes to the repository:

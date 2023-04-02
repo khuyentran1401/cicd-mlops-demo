@@ -15,8 +15,8 @@ model: model/kmeans.pkl
 elbow_metric: silhouette
 
 image:
-  elbow: image/elbow.png
-  clusters: image/cluster.png
+  elbow: dvclive/plots/images/elbow.png
+  clusters: dvclive/plots/images/cluster.png
 
 pca:
   n_components: 3

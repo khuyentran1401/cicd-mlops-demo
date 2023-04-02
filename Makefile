@@ -1,16 +1,12 @@
-activate:
-	@echo "Activating virtual environment"
-	poetry shell
+.PHONY: data
 
-install: 
-	@echo "Installing..."
-	poetry install
-
-pull_data:
+data:
 	@echo "Pulling data..."
 	dvc pull -r read
 
-setup: install pull_data
+experiment:
+	@echo "Running experiment..."
+	poetry run dvc exp run
 
 test:
 	pytest
