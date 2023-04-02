@@ -1,15 +1,14 @@
 from pathlib import Path
 
 import pandas as pd
-from hydra.utils import to_absolute_path as abs
 
 
 def load_data(path: str, csv_delimeter=","):
     file_path = Path(path)
     if file_path.suffix == ".csv":
-        df = pd.read_csv(abs(file_path), csv_delimeter)
+        df = pd.read_csv(file_path, csv_delimeter)
     elif file_path.suffix == ".pkl":
-        df = pd.read_pickle(abs(file_path))
+        df = pd.read_pickle(file_path)
     else:
         raise ValueError(
             "File format not supported. Please use a CSV or PKL file."
@@ -19,6 +18,6 @@ def load_data(path: str, csv_delimeter=","):
 
 
 def save_data(df: pd.DataFrame, path: str, name: str):
-    path = abs(f"{path}/{name}.pkl")
+    path = f"{path}/{name}.pkl"
     Path(path).parent.mkdir(exist_ok=True)
     df.to_pickle(path)

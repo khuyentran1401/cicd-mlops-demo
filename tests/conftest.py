@@ -1,3 +1,4 @@
+import dvc.api
 import pandas as pd
 import pytest
 from deepchecks.tabular import Dataset
@@ -9,26 +10,23 @@ from src.helper import load_data
 
 @pytest.fixture
 def train_data():
-    with initialize(version_base=None, config_path="../conf"):
-        config = compose(config_name="config")
-        X_train = load_data(f"{config.data.intermediate}/X_train.pkl")
-        y_train = load_data(f"{config.data.intermediate}/y_train.pkl")
+    params = dvc.api.params_show()
+    X_train = load_data(f"{params['data']['intermediate']}/X_train.pkl")
+    y_train = load_data(f"{params['data']['intermediate']}/y_train.pkl")
     df = pd.concat([X_train, y_train], axis=1)
-    return Dataset(df, label=config.process.feature)
+    return Dataset(df, label=params["process"]["feature"])
 
 
 @pytest.fixture
 def test_data():
-    with initialize(version_base=None, config_path="../conf"):
-        config = compose(config_name="config")
-        X_train = load_data(f"{config.data.intermediate}/X_test.pkl")
-        y_train = load_data(f"{config.data.intermediate}/y_test.pkl")
-    df = pd.concat([X_train, y_train], axis=1)
-    return Dataset(df, label=config.process.feature)
+    params = dvc.api.params_show()
+    X_test = load_data(f"{params['data']['intermediate']}/X_test.pkl")
+    y_test = load_data(f"{params['data']['intermediate']}/y_test.pkl")
+    df = pd.concat([X_test, y_test], axis=1)
+    return Dataset(df, label=params["process"]["feature"])
 
 
 @pytest.fixture
 def model():
-    with initialize(version_base=None, config_path="../conf"):
-        config = compose(config_name="config")
-        return load_model(config.model)
+    params = dvc.api.params_show()
+    return load_model(params["model"])

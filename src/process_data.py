@@ -1,9 +1,8 @@
 import warnings
 from typing import Tuple
 
-import hydra
+import dvc.api
 import pandas as pd
-from omegaconf import DictConfig
 from sklearn.model_selection import train_test_split
 
 from helper import load_data, save_data
@@ -32,13 +31,13 @@ def split_train_test(X: pd.DataFrame, y: pd.Series, test_size: float) -> dict:
     }
 
 
-@hydra.main(version_base=None, config_path="../conf", config_name="config")
-def process_data(config: DictConfig):
-    df = load_data(config.data.raw, csv_delimeter=";")
-    X, y = get_X_y(df, config.process.feature)
-    splitted_datasets = split_train_test(X, y, config.process.test_size)
+def process_data():
+    params = dvc.api.params_show()
+    df = load_data(params["data"]["raw"], csv_delimeter=";")
+    X, y = get_X_y(df, params["process"]["feature"])
+    splitted_datasets = split_train_test(X, y, params["process"]["test_size"])
     for name, data in splitted_datasets.items():
-        save_data(data, config.data.intermediate, name)
+        save_data(data, params["data"]["intermediate"], name)
 
 
 if __name__ == "__main__":

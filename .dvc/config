@@ -1,8 +1,6 @@
 [core]
     autostage = true
     remote = read-write
-[hydra]
-    enabled = True
 ['remote "read"']
     url = https://winequality-red.s3.amazonaws.com/
 ['remote "read-write"']
