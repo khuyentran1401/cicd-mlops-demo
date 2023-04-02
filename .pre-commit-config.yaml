@@ -1,11 +1,11 @@
 repos:
 - repo: https://github.com/ambv/black
-  rev: 20.8b1
+  rev: 23.3.0
   hooks:
   - id: black
     additional_dependencies: [click==8.0.4]
 - repo: https://github.com/pycqa/flake8
-  rev: 3.8.4
+  rev: 6.0.0
   hooks:
   - id: flake8
 - repo: https://github.com/timothycrosley/isort
@@ -13,7 +13,7 @@ repos:
   hooks:
   - id: isort
 - repo: https://github.com/iterative/dvc
-  rev: main
+  rev: 2.52.0
   hooks:
   - id: dvc-pre-commit
     additional_dependencies:
