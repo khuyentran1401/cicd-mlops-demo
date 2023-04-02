@@ -1,12 +1,11 @@
 import numpy as np
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVR
+
+from src.train import create_pipeline
 
 
 def test_pipeline():
     # Define the pipeline
-    pipeline = Pipeline([("scaler", StandardScaler()), ("svm", SVR())])
+    pipeline = create_pipeline()
 
     # Create some test data
     X_train = np.array([[1, 2], [3, 4], [5, 6]])
