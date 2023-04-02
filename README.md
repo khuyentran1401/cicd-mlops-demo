@@ -47,7 +47,10 @@ git clone https://github.com/khuyentran1401/cicd-mlops-demo
 ```
 
 Next, setup the environment by following these steps:
-1. Install [Poetry](https://python-poetry.org/docs/#installation)
+1. Install [Poetry](https://python-poetry.org/docs/#installation) (1.4.0)
+```bash
+pip install poetry==1.4.0
+```
 2. Set up the environment:
 ```bash
 # Install dependencies
