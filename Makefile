@@ -8,5 +8,9 @@ experiment:
 	@echo "Running experiment..."
 	poetry run dvc exp run
 
+push_data:
+	@echo "Pushing data and model..."
+	poetry run dvc push -r read-write
+
 test:
 	pytest

@@ -83,7 +83,7 @@ Follow these steps to push your data and model to an S3 bucket:
 ![](demo_images/add_bucket.png)
 4. Push changes to using:
 ```bash
-dvc push -r read-write
+make push_data
 ```
 
 ### Push code changes to Git
