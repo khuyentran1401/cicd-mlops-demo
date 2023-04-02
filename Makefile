@@ -2,7 +2,7 @@
 
 data:
 	@echo "Pulling data..."
-	dvc pull -r read
+	poetry run dvc pull -r read
 
 experiment:
 	@echo "Running experiment..."
