@@ -8,40 +8,28 @@ stages:
       - process
       - data
     outs:
-      - data/intermediate/scaled_data.pkl
-      - scaler
+      - data/intermediate
   train:
-    cmd: python src/segment.py
+    cmd: python src/train.py
     deps:
-      - data/intermediate/scaled_data.pkl
-      - src/segment.py
+      - data/intermediate
+      - src/train.py
     params:
       - data
       - model
-      - pca
-      - scaler
-      - segment
+      - train
       - dvclive/params.yaml:
-          - k
+        - Best hyperparameters
     outs:
-      - data/intermediate/pca_data.pkl
-      - model/kmeans.pkl
-    plots:
-      - dvclive/plots/images/elbow.png
+      - model/svm.pkl
   evaluate:
     cmd: python src/evaluate.py
     deps:
-      - data/intermediate
-      - scaler
+      - data/intermediate 
       - src/evaluate.py
     params:
       - data
-      - image
       - model
-      - scaler
-    outs:
-      - data/final
-    plots:
-      - dvclive/plots/images/cluster.png
     metrics:
       - dvclive/metrics.json
+    

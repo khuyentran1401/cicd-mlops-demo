@@ -4,129 +4,81 @@ stages:
     cmd: python src/process_data.py
     deps:
     - path: data/raw
-      md5: 3ab2fa89af88fa75de21542ec710c4ba.dir
-      size: 222379
+      md5: 84a0e37242f885ea418b9953761d35de.dir
+      size: 84199
       nfiles: 2
     - path: src/process_data.py
-      md5: 9854ddc66604e1e1d8069586ac68b561
-      size: 2817
+      md5: 79bffefcc532cfac9b3a7c754d67d917
+      size: 1230
     params:
       params.yaml:
         data:
-          raw: data/raw/marketing_campaign.csv
-          scaled: data/intermediate/scaled_data.pkl
-          pca: data/intermediate/pca_data.pkl
-          final: data/final/segmented_data.pkl
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
         process:
-          name: process_3
-          keep_columns:
-          - Income
-          - Recency
-          - NumWebVisitsMonth
-          - NumDealsPurchases
-          - NumWebPurchases
-          - NumCatalogPurchases
-          - NumStorePurchases
-          - Complain
-          - Response
-          - age
-          - enrollment_years
-          - family_size
-          remove_outliers_threshold:
-            age: 90
-            Income: 600000
-          encode:
-            family_size:
-              Married: 2
-              Together: 2
-              Absurd: 1
-              Widow: 1
-              YOLO: 1
-              Divorced: 1
-              Single: 1
-              Alone: 1
+          feature: quality
+          test_size: 0.2
     outs:
-    - path: data/intermediate/scaled_data.pkl
-      md5: 34f57e63b0ff8d66ef263ab1f342f0e3
-      size: 213225
-    - path: scaler
-      md5: 8aecde394cbf7bc4517b00bea66af5ca.dir
-      size: 1415
-      nfiles: 1
+    - path: data/intermediate
+      md5: 3377ebd11434a04b64fe3ca5cb3cc455.dir
+      size: 194875
+      nfiles: 4
   train:
-    cmd: python src/segment.py
+    cmd: python src/train.py
     deps:
-    - path: data/intermediate/scaled_data.pkl
-      md5: 34f57e63b0ff8d66ef263ab1f342f0e3
-      size: 213225
-    - path: src/segment.py
-      md5: 28c1e90ba2af4c6fd8cad962bab234e4
-      size: 2146
+    - path: data/intermediate
+      md5: 3377ebd11434a04b64fe3ca5cb3cc455.dir
+      size: 194875
+      nfiles: 4
+    - path: src/train.py
+      md5: aa0d5fc75daf712b5c870a004515d1a5
+      size: 1640
     params:
       params.yaml:
         data:
-          raw: data/raw/marketing_campaign.csv
-          scaled: data/intermediate/scaled_data.pkl
-          pca: data/intermediate/pca_data.pkl
-          final: data/final/segmented_data.pkl
-        model: model/kmeans.pkl
-        pca:
-          n_components: 3
-          columns:
-          - col1
-          - col2
-          - col3
-        scaler: scaler/standard_scaler.pkl
-        segment:
-          algorithm: KMeans
-          args:
-            n_init: auto
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
+        model: model/svm.pkl
+        train:
+          hyperparameters:
+            svm__kernel:
+            - linear
+            - rbf
+            svm__C:
+            - 0.1
+            - 1
+            - 10
+            svm__gamma:
+            - 0.1
+            - 1
+            - 10
+          cv: 2
       dvclive/params.yaml:
-        k: 2
+        Best hyperparameters:
+          svm__C: 1
+          svm__gamma: 0.1
+          svm__kernel: rbf
     outs:
-    - path: data/intermediate/pca_data.pkl
-      md5: 054312a9788a1e0b32c870c8fea1f3ca
-      size: 53793
-    - path: dvclive/plots/images/elbow.png
-      md5: 0d708305be13aa72f2ae673174ccbc4b
-      size: 58475
-    - path: model/kmeans.pkl
-      md5: a09898253aa9b5c2131a89ec486c2f11
-      size: 10007
+    - path: model/svm.pkl
+      md5: 90cd312125396b12fff6865031dafe7f
+      size: 118919
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: data/intermediate
-      md5: ef0d416aeaff630ad0f71c518b9b8f7d.dir
-      size: 267018
-      nfiles: 2
-    - path: scaler
-      md5: 8aecde394cbf7bc4517b00bea66af5ca.dir
-      size: 1415
-      nfiles: 1
+      md5: 3377ebd11434a04b64fe3ca5cb3cc455.dir
+      size: 194875
+      nfiles: 4
     - path: src/evaluate.py
-      md5: 1ace45e4d3de090ae6df2abb655dbc7f
-      size: 2439
+      md5: 1d52ea085a2ad25262c83506a5b3aebf
+      size: 894
     params:
       params.yaml:
         data:
-          raw: data/raw/marketing_campaign.csv
-          scaled: data/intermediate/scaled_data.pkl
-          pca: data/intermediate/pca_data.pkl
-          final: data/final/segmented_data.pkl
-        image:
-          elbow: dvclive/plots/images/elbow.png
-          clusters: dvclive/plots/images/cluster.png
-        model: model/kmeans.pkl
-        scaler: scaler/standard_scaler.pkl
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
+        model: model/svm.pkl
     outs:
-    - path: data/final
-      md5: 209dc45313f4d9fefdcc5ed385dd0092.dir
-      size: 222166
-      nfiles: 1
     - path: dvclive/metrics.json
-      md5: dcbe6a1305c87dc672f6dee3b83f3e66
-      size: 46
-    - path: dvclive/plots/images/cluster.png
-      md5: 944eacbbf2a720bb197a52c748b5d161
-      size: 148465
+      md5: 2f8e79d38ce45ca6b53832f5d70c7f98
+      size: 44

@@ -1,49 +1,21 @@
-process:
-  name: process_3
-  keep_columns:
-  - Income
-  - Recency
-  - NumWebVisitsMonth
-  - NumDealsPurchases
-  - NumWebPurchases
-  - NumCatalogPurchases
-  - NumStorePurchases
-  - Complain
-  - Response
-  - age
-  - enrollment_years
-  - family_size
-  remove_outliers_threshold:
-    age: 90
-    Income: 600000
-  encode:
-    family_size:
-      Married: 2
-      Together: 2
-      Absurd: 1
-      Widow: 1
-      YOLO: 1
-      Divorced: 1
-      Single: 1
-      Alone: 1
-segment:
-  algorithm: KMeans
-  args:
-    n_init: auto
 data:
-  raw: data/raw/marketing_campaign.csv
-  scaled: data/intermediate/scaled_data.pkl
-  pca: data/intermediate/pca_data.pkl
-  final: data/final/segmented_data.pkl
-scaler: scaler/standard_scaler.pkl
-model: model/kmeans.pkl
-elbow_metric: silhouette
-image:
-  elbow: dvclive/plots/images/elbow.png
-  clusters: dvclive/plots/images/cluster.png
-pca:
-  n_components: 3
-  columns:
-  - col1
-  - col2
-  - col3
+  raw: data/raw/winequality-red.csv
+  intermediate: data/intermediate
+model: model/svm.pkl
+process:
+  feature: quality
+  test_size: 0.2
+train:
+  hyperparameters:
+    svm__kernel:
+    - linear
+    - rbf
+    svm__C:
+    - 0.1
+    - 1
+    - 10
+    svm__gamma:
+    - 0.1
+    - 1
+    - 10
+  cv: 2

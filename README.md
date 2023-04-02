@@ -51,7 +51,7 @@ Next, setup the environment by following these steps:
 2. Set up the environment:
 ```bash
 # Install dependencies
-poetry install
+poetry install --without dev
 
 # Pull data from the remote storage 
 make data

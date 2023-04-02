@@ -1,26 +1,25 @@
-defaults:
-  - process: process_3
-  - segment: KMeans
-  - _self_
-
 data:
-  raw: data/raw/marketing_campaign.csv
-  scaled: data/intermediate/scaled_data.pkl
-  pca: data/intermediate/pca_data.pkl 
-  final: data/final/segmented_data.pkl
+  raw: data/raw/winequality-red.csv
+  intermediate: data/intermediate
 
-scaler: scaler/standard_scaler.pkl
-model: model/kmeans.pkl
+model: model/svm.pkl
 
-elbow_metric: silhouette
+process:
+  feature: quality
+  test_size: 0.2
 
-image:
-  elbow: dvclive/plots/images/elbow.png
-  clusters: dvclive/plots/images/cluster.png
+train:
+  hyperparameters:
+    svm__kernel: 
+      - linear
+      - rbf
+    svm__C:
+      - 0.1
+      - 1
+      - 10
+    svm__gamma:
+      - 0.1
+      - 1
+      - 10
+  cv: 2
 
-pca:
-  n_components: 3
-  columns:
-    - col1
-    - col2
-    - col3

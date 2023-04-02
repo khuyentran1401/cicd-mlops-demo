@@ -1,1 +1,4 @@
-k: 2
+Best hyperparameters:
+  svm__C: 1
+  svm__gamma: 0.1
+  svm__kernel: rbf

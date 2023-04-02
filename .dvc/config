@@ -4,6 +4,6 @@
 [hydra]
     enabled = True
 ['remote "write"']
-    url = s3://customer-segmentation-1/
+    url = s3://winequality-red/
 ['remote "read"']
-    url = https://customer-segmentation-1.s3.amazonaws.com/
+    url = https://winequality-red.s3.amazonaws.com/
