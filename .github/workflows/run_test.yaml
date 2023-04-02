@@ -28,7 +28,10 @@ jobs:
         run: poetry install
 
       - name: Pull data and model
-        run: poetry run dvc pull -r read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: poetry run dvc pull -r read-write
 
       - name: Run tests
         run: poetry run pytest 

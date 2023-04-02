@@ -41,6 +41,7 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 * `dvclive`: consists of metrics and parameters of DVC experiments
 
 ## Try it out
+### Set up
 To try out this project, first start with cloning the project to your local machine:
 ```bash
 git clone https://github.com/khuyentran1401/cicd-mlops-demo
@@ -60,6 +61,7 @@ poetry install --without dev
 make data
 ```
 
+### Create experiments
 Make changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `conf/config.yaml`:
 
 ![](demo_images/code_change.png)
@@ -69,6 +71,23 @@ Create an experiment:
 make experiment
 ```
 
+### Push model and data to a remote storage
+After running the experiments, we need to store changes to our data and model remotely. One option is to use an S3 bucket as a remote storage.
+
+Follow these steps to push your data and model to an S3 bucket:
+
+1. [Create an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
+2. Ensure [your S3 credentials are store locally](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-methods).
+3. Add the URI of your S3 bucket to the `.dvc/config` file
+
+![](demo_images/add_bucket.png)
+4. Push changes to using:
+```bash
+dvc push -r read-write
+```
+
+### Push code changes to Git
+
 Add, commit, and push changes to the repository:
 
 ```bash
@@ -77,6 +96,12 @@ git commit -m 'add 100 for C'
 git push origin main
 ```
 
+### Add AWS credentials to GitHub Action
+To enable GitHub Actions to access your AWS credentials for pulling data and model from your S3 bucket, you can securely store your sensitive information with encrypted secrets. Follow [this tutorial]((https://docs.github.com/en/actions/security-guides/encrypted-secrets)) to add `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` secrets to your repository.
+
+![](demo_images/aws_credentials.png)
+
+### Create a Pull Request
 Create a pull request and a GitHub job will be triggered:
 
 ![](demo_images/pr.png)

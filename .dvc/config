@@ -1,9 +1,11 @@
 [core]
     autostage = true
-    remote = write
+    remote = bucket
 [hydra]
     enabled = True
-['remote "write"']
+['remote "bucket"']
     url = s3://winequality-red/
 ['remote "read"']
     url = https://winequality-red.s3.amazonaws.com/
+['remote "read-write"']
+    url = s3://khuyen-test-bucket/
