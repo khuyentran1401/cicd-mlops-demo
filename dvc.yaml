@@ -18,8 +18,6 @@ stages:
       - data
       - model
       - train
-      - dvclive/params.yaml:
-        - Best hyperparameters
     outs:
       - model/svm.pkl
   evaluate:

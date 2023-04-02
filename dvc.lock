@@ -8,8 +8,8 @@ stages:
       size: 84199
       nfiles: 2
     - path: src/process_data.py
-      md5: 79bffefcc532cfac9b3a7c754d67d917
-      size: 1230
+      md5: a4137dd765a7c27ea90b0984209ee147
+      size: 1223
     params:
       params.yaml:
         data:
@@ -31,8 +31,8 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/train.py
-      md5: aa0d5fc75daf712b5c870a004515d1a5
-      size: 1640
+      md5: e87b3d67d55d2e927b9c6b959e06354e
+      size: 1629
     params:
       params.yaml:
         data:
@@ -53,14 +53,9 @@ stages:
             - 1
             - 10
           cv: 2
-      dvclive/params.yaml:
-        Best hyperparameters:
-          svm__C: 1
-          svm__gamma: 0.1
-          svm__kernel: rbf
     outs:
     - path: model/svm.pkl
-      md5: 90cd312125396b12fff6865031dafe7f
+      md5: dec62555304f9d416264a74c56777907
       size: 118919
   evaluate:
     cmd: python src/evaluate.py
@@ -70,7 +65,7 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/evaluate.py
-      md5: 1d52ea085a2ad25262c83506a5b3aebf
+      md5: efb3f0e6696dce0e0cb5c60d698a0475
       size: 894
     params:
       params.yaml:

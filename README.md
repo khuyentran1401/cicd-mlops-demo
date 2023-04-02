@@ -73,7 +73,7 @@ Add, commit, and push changes to the repository:
 
 ```bash
 git add .
-git commit -m 'change process_3 to process_1'
+git commit -m 'add 100 for C'
 git push origin main
 ```
 

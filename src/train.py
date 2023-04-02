@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
 
 from dvclive import Live
-from helper import load_data, save_data
+from helper import load_data
 
 
 def create_pipeline() -> Pipeline:
