@@ -48,4 +48,6 @@ jobs:
           cat dvclive/metrics.json >> report.md
           # Add the parameters to the report
           echo -e >> report.md
-          cat dvclive/params.yaml >> report.md 
+          cat dvclive/params.yaml >> report.md
+          # Create a report in PR
+          cml comment create report.md 

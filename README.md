@@ -99,7 +99,3 @@ To enable GitHub Actions to access your AWS credentials for pulling data and mod
 [Create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) and a GitHub job will be triggered:
 
 ![](demo_images/pr.png)
-
-
-
-

@@ -2,7 +2,6 @@ import dvc.api
 import pandas as pd
 import pytest
 from deepchecks.tabular import Dataset
-from hydra import compose, initialize
 
 from src.evaluate import load_model
 from src.helper import load_data
@@ -14,7 +13,7 @@ def train_data():
     X_train = load_data(f"{params['data']['intermediate']}/X_train.pkl")
     y_train = load_data(f"{params['data']['intermediate']}/y_train.pkl")
     df = pd.concat([X_train, y_train], axis=1)
-    return Dataset(df, label=params["process"]["feature"])
+    return Dataset(df, label=params["process"]["feature"], cat_features=[])
 
 
 @pytest.fixture
@@ -23,7 +22,7 @@ def test_data():
     X_test = load_data(f"{params['data']['intermediate']}/X_test.pkl")
     y_test = load_data(f"{params['data']['intermediate']}/y_test.pkl")
     df = pd.concat([X_test, y_test], axis=1)
-    return Dataset(df, label=params["process"]["feature"])
+    return Dataset(df, label=params["process"]["feature"], cat_features=[])
 
 
 @pytest.fixture
