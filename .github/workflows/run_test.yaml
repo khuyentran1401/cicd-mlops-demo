@@ -49,6 +49,3 @@ jobs:
           # Add the parameters to the report
           echo -e >> report.md
           cat dvclive/params.yaml >> report.md 
-        
-          
-       
