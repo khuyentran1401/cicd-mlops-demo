@@ -56,7 +56,7 @@ make data
 ```
 
 ### Create experiments
-Make changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `conf/config.yaml`:
+Make changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `params.yaml`:
 
 ![](demo_images/code_change.png)
 
