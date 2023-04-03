@@ -75,7 +75,7 @@ Follow these steps to push your data and model to an S3 bucket:
 3. Add the URI of your S3 bucket to the `.dvc/config` file
 
 ![](demo_images/add_bucket.png)
-4. Push changes to using:
+4. Push changes to S3 using:
 ```bash
 make push_data
 ```
