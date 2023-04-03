@@ -38,16 +38,3 @@ jobs:
 
       - name: Evaluate model
         run: poetry run dvc exp run evaluate
-
-      - name: Iterative CML setup
-        uses: iterative/setup-cml@v1
-      
-      - name: Create CML report
-        run: |
-          # Add the metrics to the report
-          cat dvclive/metrics.json >> report.md
-          # Add the parameters to the report
-          echo -e >> report.md
-          cat dvclive/params.yaml >> report.md
-          # Create a report in PR
-          cml comment create report.md 
