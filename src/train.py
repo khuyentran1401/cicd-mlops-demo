@@ -6,14 +6,14 @@ import pandas as pd
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVR
+from sklearn.svm import SVC
 
 from dvclive import Live
 from helper import load_data
 
 
 def create_pipeline() -> Pipeline:
-    return Pipeline([("scaler", StandardScaler()), ("svm", SVR())])
+    return Pipeline([("scaler", StandardScaler()), ("svm", SVC())])
 
 
 def train_model(
@@ -21,10 +21,10 @@ def train_model(
     y_train: pd.Series,
     pipeline: Pipeline,
     hyperparameters: dict,
-    cv: int,
+    grid_params: dict,
 ) -> GridSearchCV:
     grid_search = GridSearchCV(
-        pipeline, dict(hyperparameters), cv=cv, verbose=3
+        pipeline, dict(hyperparameters), **grid_params
     )
     grid_search.fit(X_train, y_train)
     return grid_search
@@ -46,7 +46,7 @@ def train() -> None:
             y_train,
             pipeline,
             params["train"]["hyperparameters"],
-            params["train"]["cv"],
+            params["train"]["grid_search"],
         )
         live.log_params({"Best hyperparameters": grid_search.best_params_})
         save_model(grid_search, params["model"])

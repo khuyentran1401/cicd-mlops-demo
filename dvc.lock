@@ -31,8 +31,8 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/train.py
-      md5: a99b77fff9645a328507462624d5d507
-      size: 1466
+      md5: 076c16fa213e8055a28a68cc3ba12438
+      size: 1482
     params:
       params.yaml:
         data:
@@ -52,11 +52,14 @@ stages:
             - 0.1
             - 1
             - 10
-          cv: 2
+          grid_search:
+            cv: 5
+            scoring: accuracy
+            verbose: 3
     outs:
     - path: model/svm.pkl
-      md5: 501039daada4351c9e8769fb5c7ccc0f
-      size: 116055
+      md5: 33dcb3f08f599cfed30dd0e64a332bc8
+      size: 213175
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -64,9 +67,13 @@ stages:
       md5: 3377ebd11434a04b64fe3ca5cb3cc455.dir
       size: 194875
       nfiles: 4
+    - path: model
+      md5: bdf81ad5f9b2c884e6f61603146f2b4e.dir
+      size: 213175
+      nfiles: 1
     - path: src/evaluate.py
-      md5: e735396586ecf705889e853400f1e143
-      size: 766
+      md5: 509f83286222487338f9bcca981475c3
+      size: 727
     params:
       params.yaml:
         data:
@@ -75,5 +82,5 @@ stages:
         model: model/svm.pkl
     outs:
     - path: dvclive/metrics.json
-      md5: 2f8e79d38ce45ca6b53832f5d70c7f98
-      size: 44
+      md5: d883d3a4cc9dddb29de51edbbe9cd636
+      size: 24

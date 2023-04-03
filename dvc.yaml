@@ -23,6 +23,7 @@ stages:
   evaluate:
     cmd: python src/evaluate.py
     deps:
+      - model
       - data/intermediate 
       - src/evaluate.py
     params:

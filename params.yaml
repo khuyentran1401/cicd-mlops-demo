@@ -18,4 +18,7 @@ train:
     - 0.1
     - 1
     - 10
-  cv: 2
+  grid_search:
+    cv: 5
+    scoring: accuracy
+    verbose: 3
