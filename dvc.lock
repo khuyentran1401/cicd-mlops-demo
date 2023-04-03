@@ -8,7 +8,7 @@ stages:
       size: 84199
       nfiles: 2
     - path: src/process_data.py
-      md5: ede9d16e717aa1d615cea524aff7e048
+      md5: 8c10093c63780b397c4b5ebed46c1154
       size: 1157
     params:
       params.yaml:
@@ -31,8 +31,8 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/train.py
-      md5: a8ae1e235fe6a1601b9b36568e4ec22f
-      size: 1504
+      md5: a99b77fff9645a328507462624d5d507
+      size: 1466
     params:
       params.yaml:
         data:
@@ -55,7 +55,7 @@ stages:
           cv: 2
     outs:
     - path: model/svm.pkl
-      md5: 9441bc3213e370a45c2a5c2d3ddde5ac
+      md5: 501039daada4351c9e8769fb5c7ccc0f
       size: 116055
   evaluate:
     cmd: python src/evaluate.py
@@ -65,7 +65,7 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/evaluate.py
-      md5: 88e2a4870fc0473d535417f0af6869ee
+      md5: e735396586ecf705889e853400f1e143
       size: 766
     params:
       params.yaml:
