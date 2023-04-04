@@ -25,6 +25,7 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 
 ## Tools Used in This Project
 * [DVC](https://dvc.org/): Version data and experiments - [article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0)
+* [CML](https://cml.dev/doc): Post a comment to the pull request showing the metrics and parameters of an experiment
 
 ## Project Structure
 * `src`: consists of Python scripts
