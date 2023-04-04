@@ -12,8 +12,9 @@ stages:
       size: 1157
     params:
       params.yaml:
-        data.intermediate: data/intermediate
-        data.raw: data/raw/winequality-red.csv
+        data:
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
         process:
           feature: quality
           test_size: 0.2
@@ -34,27 +35,30 @@ stages:
       size: 1482
     params:
       params.yaml:
-        data.intermediate: data/intermediate
+        data:
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
         model: model/svm.pkl
-        train.grid_search:
-          cv: 5
-          scoring: accuracy
-          verbose: 3
-        train.hyperparameters:
-          svm__kernel:
-          - linear
-          - rbf
-          svm__C:
-          - 0.1
-          - 1
-          - 10
-          svm__gamma:
-          - 0.1
-          - 1
-          - 10
+        train:
+          hyperparameters:
+            svm__kernel:
+            - linear
+            - rbf
+            svm__C:
+            - 0.1
+            - 1
+            - 10
+            svm__gamma:
+            - 0.1
+            - 1
+            - 10
+          grid_search:
+            cv: 5
+            scoring: accuracy
+            verbose: 3
     outs:
     - path: model/svm.pkl
-      md5: 34cd20db362da82ea7d7d8e6b611ff30
+      md5: 33dcb3f08f599cfed30dd0e64a332bc8
       size: 213175
   evaluate:
     cmd: python src/evaluate.py
@@ -64,7 +68,7 @@ stages:
       size: 194875
       nfiles: 4
     - path: model
-      md5: 39e376b78a1a62a014faaca169ed0031.dir
+      md5: bdf81ad5f9b2c884e6f61603146f2b4e.dir
       size: 213175
       nfiles: 1
     - path: src/evaluate.py
@@ -72,7 +76,9 @@ stages:
       size: 727
     params:
       params.yaml:
-        data.intermediate: data/intermediate
+        data:
+          raw: data/raw/winequality-red.csv
+          intermediate: data/intermediate
         model: model/svm.pkl
     outs:
     - path: dvclive/metrics.json
