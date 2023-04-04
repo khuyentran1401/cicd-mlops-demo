@@ -94,10 +94,11 @@ AWS credentials are necessary to pull data and model from your S3 bucket. Follow
 
 ![](demo_images/aws_credentials.png)
 
-### GitHub token
-GitHub token is necessary to write the metrics and parameters as a comment of your pull request. To use GitHub token as an ecrypted secret, follow the following steps:
-- Create [a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
-- Create a secret named `TOKEN_GITHUB` and paste the token created previously into the "Value" field
+#### GitHub token
+GitHub token is necessary to write metrics and parameters as a comment in your pull request. To use GitHub token as an encrypted secret, follow these steps:
+1. Create [a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
+2. Create a secret named `TOKEN_GITHUB` 
+3. In the "Value" field, paste the token that you created in step 1.
 
 ![](demo_images/github_token.png)
 ### Create a Pull Request
