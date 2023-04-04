@@ -12,9 +12,8 @@ stages:
       size: 1157
     params:
       params.yaml:
-        data:
-          raw: data/raw/winequality-red.csv
-          intermediate: data/intermediate
+        data.intermediate: data/intermediate
+        data.raw: data/raw/winequality-red.csv
         process:
           feature: quality
           test_size: 0.2
@@ -35,32 +34,28 @@ stages:
       size: 1482
     params:
       params.yaml:
-        data:
-          raw: data/raw/winequality-red.csv
-          intermediate: data/intermediate
+        data.intermediate: data/intermediate
         model: model/svm.pkl
-        train:
-          hyperparameters:
-            svm__kernel:
-            - linear
-            - rbf
-            svm__C:
-            - 0.1
-            - 1
-            - 10
-            - 100
-            svm__gamma:
-            - 0.1
-            - 1
-            - 10
-          grid_search:
-            cv: 5
-            scoring: accuracy
-            verbose: 3
+        train.grid_search:
+          cv: 5
+          scoring: accuracy
+          verbose: 3
+        train.hyperparameters:
+          svm__kernel:
+          - linear
+          - rbf
+          svm__C:
+          - 0.1
+          - 1
+          - 10
+          svm__gamma:
+          - 0.1
+          - 1
+          - 10
     outs:
     - path: model/svm.pkl
-      md5: ae8dd2ee50c010038133155b77015106
-      size: 213903
+      md5: 34cd20db362da82ea7d7d8e6b611ff30
+      size: 213175
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -69,17 +64,15 @@ stages:
       size: 194875
       nfiles: 4
     - path: model
-      md5: 81335dd0f3d905c15cfd961aaf3c9d49.dir
-      size: 213903
+      md5: 39e376b78a1a62a014faaca169ed0031.dir
+      size: 213175
       nfiles: 1
     - path: src/evaluate.py
       md5: 509f83286222487338f9bcca981475c3
       size: 727
     params:
       params.yaml:
-        data:
-          raw: data/raw/winequality-red.csv
-          intermediate: data/intermediate
+        data.intermediate: data/intermediate
         model: model/svm.pkl
     outs:
     - path: dvclive/metrics.json

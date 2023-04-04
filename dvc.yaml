@@ -6,7 +6,8 @@ stages:
       - src/process_data.py
     params:
       - process
-      - data
+      - data.raw
+      - data.intermediate
     outs:
       - data/intermediate
   train:
@@ -15,9 +16,10 @@ stages:
       - data/intermediate
       - src/train.py
     params:
-      - data
+      - data.intermediate
       - model
-      - train
+      - train.hyperparameters
+      - train.grid_search
     outs:
       - model/svm.pkl
   evaluate:
@@ -27,7 +29,7 @@ stages:
       - data/intermediate 
       - src/evaluate.py
     params:
-      - data
+      - data.intermediate
       - model
     metrics:
       - dvclive/metrics.json
