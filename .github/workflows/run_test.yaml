@@ -11,7 +11,6 @@ jobs:
   test_model:
     name: Test processed code and model
     runs-on: ubuntu-latest
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - name: Checkout 
         id: checkout
