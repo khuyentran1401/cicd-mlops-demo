@@ -24,7 +24,6 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 - If all tests passed, the code is merged to the main branch
 
 ## Tools Used in This Project
-* [poetry](https://python-poetry.org/): Manage Python dependencies - [article](https://towardsdatascience.com/how-to-effortlessly-publish-your-python-package-to-pypi-using-poetry-44b305362f9f)
 * [DVC](https://dvc.org/): Version data and experiments - [article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0)
 
 ## Project Structure
@@ -41,18 +40,16 @@ To try out this project, first start with cloning the project to your local mach
 git clone https://github.com/khuyentran1401/cicd-mlops-demo
 ```
 
-Next, setup the environment by following these steps:
-1. Install [Poetry](https://python-poetry.org/docs/#installation) (1.4.0)
+Set up the environment:
 ```bash
-pip install poetry==1.4.0
-```
-2. Set up the environment:
-```bash
-# Install dependencies
-poetry install --without dev
+# Go to the project directory
+cd cicd-mlops-demo
 
-# Pull data from the remote storage 
-make data
+# Install dependencies
+pip install -r requirements.txt
+
+# Pull data from the remote storage location called read 
+dvc pull -r read
 ```
 
 ### Create experiments
@@ -62,7 +59,7 @@ Make changes to any files in the following directories `src`, `tests`, `conf`. T
 
 Create an experiment:
 ```bash
-make experiment
+dvc exp run
 ```
 
 ### Push model and data to a remote storage
@@ -75,9 +72,9 @@ Follow these steps to push your data and model to an S3 bucket:
 3. Add the URI of your S3 bucket to the `.dvc/config` file
 
 ![](demo_images/add_bucket.png)
-4. Push changes to S3 using:
+4. Push changes a remote location called `read-write` using:
 ```bash
-make push_data
+dvc push -r read-write
 ```
 
 ### Push code changes to Git
