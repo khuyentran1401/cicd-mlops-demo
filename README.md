@@ -87,11 +87,19 @@ git commit -m 'add 100 for C'
 git push origin main
 ```
 
-### Add AWS credentials to GitHub Action
-To enable GitHub Actions to access your AWS credentials for pulling data and model from your S3 bucket, you can securely store your sensitive information with encrypted secrets. Follow [this tutorial]((https://docs.github.com/en/actions/security-guides/encrypted-secrets)) to add `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` secrets to your repository.
+### Add Encrypted Secrets to GitHub Action
+Encrypted secrets allows you to store your sensitive information in your repository. We will use encrypted secrets to make AWS credentials and GitHub token accessible by GitHub Actions.
+#### AWS credentials
+AWS credentials are necessary to pull data and model from your S3 bucket. Follow [this tutorial](https://docs.github.com/en/actions/security-guides/encrypted-secrets) to add `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` secrets to your repository.
 
 ![](demo_images/aws_credentials.png)
 
+### GitHub token
+GitHub token is necessary to write the metrics and parameters as a comment of your pull request. To use GitHub token as an ecrypted secret, follow the following steps:
+- Create [a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
+- Create a secret named `TOKEN_GITHUB` and paste the token created previously into the "Value" field
+
+![](demo_images/github_token.png)
 ### Create a Pull Request
 [Create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) and a GitHub job will be triggered:
 
