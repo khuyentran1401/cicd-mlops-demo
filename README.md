@@ -13,15 +13,15 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 
 ## Scenario
 - Data scientists make some changes to the code and create a new model locally
-- Data scientists push model and data to S3
+- Data scientists push model and data to a remote storage
 - Data scientists create a pull request for the changes
 - A CI pipeline is kicked off to test the data and model
+- If all tests passed, the code is merged to the main branch
 
-## Pipeline overview
+## CI Pipeline
 - Pull data and model from a remote storage
 - Run tests
-- Automatically generate metrics report (optional)
-- If all tests passed, the code is merged to the main branch
+- Automatically generate metrics report
 
 ## Tools Used in This Project
 * [DVC](https://dvc.org/): Version data and experiments - [article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0)
@@ -102,6 +102,8 @@ GitHub token is necessary to write metrics and parameters as a comment in your p
 
 ![](demo_images/github_token.png)
 ### Create a Pull Request
-[Create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) and a GitHub job will be triggered:
+Next, [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+
+Once creating a PR, a GitHub workflow will start to run tests. Once all tests passed, a comment will appear in the PR with the metrics and parameters of the new experiment. 
 
 ![](demo_images/pr.png)
