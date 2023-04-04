@@ -11,6 +11,7 @@ jobs:
   test_model:
     name: Test processed code and model
     runs-on: ubuntu-latest
+    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - name: Checkout 
         id: checkout
@@ -38,3 +39,18 @@ jobs:
 
       - name: Evaluate model
         run: poetry run dvc exp run evaluate
+
+      - name: Iterative CML setup
+        uses: iterative/setup-cml@v1
+    
+      - name: Create CML report
+        env:
+          REPO_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          # Add the metrics to the report
+          dvc metrics diff ci-main --show-md >> report.md
+          # Add the parameters to the report
+          echo -e >> report.md
+          dvc params diff ci-main --show-md >> report.md
+          # Create a report in PR
+          cml comment create report.md 
