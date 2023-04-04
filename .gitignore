@@ -12,3 +12,4 @@ dvclive/plots/images
 data/raw
 data/intermediate
 data/final
+venv
