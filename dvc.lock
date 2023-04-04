@@ -59,7 +59,7 @@ stages:
             verbose: 3
     outs:
     - path: model/svm.pkl
-      md5: 8b19c8b1a1b365e5ecbe5650ad1f3213
+      md5: a4f357e8e71d2feba5455b98f57383e1
       size: 213903
   evaluate:
     cmd: python src/evaluate.py
@@ -69,7 +69,7 @@ stages:
       size: 194875
       nfiles: 4
     - path: model
-      md5: 3645251a2dbd9ac3b7c5a460baa31ad6.dir
+      md5: 70c07e00e0391441ff9c35719dd9bb70.dir
       size: 213903
       nfiles: 1
     - path: src/evaluate.py
