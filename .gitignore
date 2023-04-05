@@ -13,3 +13,11 @@ data/raw
 data/intermediate
 data/final
 venv
+
+# Mage
+.file_versions
+.logs
+mage_data
+src/data/raw
+src/data/raw.dvc
+src/dvclive

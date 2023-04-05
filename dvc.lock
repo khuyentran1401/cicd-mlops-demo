@@ -47,7 +47,7 @@ stages:
             svm__C:
             - 0.1
             - 1
-            - 10
+            - 100
             svm__gamma:
             - 0.1
             - 1
@@ -58,7 +58,7 @@ stages:
             verbose: 3
     outs:
     - path: model/svm.pkl
-      md5: 33dcb3f08f599cfed30dd0e64a332bc8
+      md5: 8f7221a171b8baf0c5602eb0272ed9ef
       size: 213175
   evaluate:
     cmd: python src/evaluate.py
@@ -68,7 +68,7 @@ stages:
       size: 194875
       nfiles: 4
     - path: model
-      md5: bdf81ad5f9b2c884e6f61603146f2b4e.dir
+      md5: 448d9152bf75ede2f1e93984a0a46784.dir
       size: 213175
       nfiles: 1
     - path: src/evaluate.py
