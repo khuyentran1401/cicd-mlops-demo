@@ -32,9 +32,8 @@ def save_model(model, path: str):
 
 
 @transformer
-def transform(data, **kwargs):
+def transform(X_train, y_train, **kwargs):
     params = dvc.api.params_show()
-    X_train, y_train = data
 
     pipeline = create_pipeline()
     grid_search = train_model(

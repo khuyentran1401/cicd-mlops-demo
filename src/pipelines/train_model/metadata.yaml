@@ -4,6 +4,11 @@ blocks:
   configuration: {}
   downstream_blocks:
   - train_and_save_model
+  - distribution_for_alcohol
+  - unique_values_for_load_training_data
+  - most_frequent_values_for_load_training_data
+  - summary_overview_for_load_training_data
+  - feature_profiles_for_load_training_data
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -13,6 +18,22 @@ blocks:
   type: data_loader
   upstream_blocks: []
   uuid: load_training_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - train_and_save_model
+  - pie_chart_for_load_training_labels_1680728104206
+  - histogram_for_load_training_labels_1680728159815
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_training_labels
+  status: executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_training_labels
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -27,6 +48,7 @@ blocks:
   type: transformer
   upstream_blocks:
   - load_training_data
+  - load_training_labels
   uuid: train_and_save_model
 - all_upstream_blocks_executed: true
   color: null
@@ -47,6 +69,135 @@ description: null
 extensions: {}
 name: train model
 type: python
-updated_at: '2023-04-05 02:00:00'
+updated_at: '2023-04-05 20:56:05'
 uuid: train_model
-widgets: []
+widgets:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    buckets: 10
+    chart_type: histogram
+    group_by:
+    - alcohol
+    x: x
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: distribution_for_alcohol
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_data
+  uuid: distribution_for_alcohol
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    buckets: 7
+    chart_type: pie chart
+    x: x
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: pie chart for load_training_labels 1680728104206
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_labels
+  uuid: pie_chart_for_load_training_labels_1680728104206
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_style: horizontal
+    chart_type: bar chart
+    x: columns
+    y: number_of_unique_values
+    y_sort_order: descending
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: unique values for load_training_data
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_data
+  uuid: unique_values_for_load_training_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: table
+    height: 3000
+    index: column_index
+    x: columns
+    y: rows
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: most frequent values for load_training_data
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_data
+  uuid: most_frequent_values_for_load_training_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: table
+    height: 3000
+    index: stats
+    x: headers
+    y: rows
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: summary overview for load_training_data
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_data
+  uuid: summary_overview_for_load_training_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: table
+    height: 3000
+    index: stats
+    x: columns
+    y: rows
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: feature profiles for load_training_data
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_data
+  uuid: feature_profiles_for_load_training_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    buckets: 10
+    chart_type: histogram
+    x: x
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: histogram for load_training_labels 1680728159815
+  status: executed
+  type: chart
+  upstream_blocks:
+  - load_training_labels
+  uuid: histogram_for_load_training_labels_1680728159815
