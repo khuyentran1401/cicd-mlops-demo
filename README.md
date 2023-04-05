@@ -32,7 +32,9 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 * `data`: consists of data
 * `tests`: consists of test files
 * `dvclive`: consists of metrics of DVC experiments
+* `.dvc/config`: consists of locations of the remote storage
 * `params.yaml`: consists of parameters for Python scripts
+* `.github/workflows`: consists of GitHub workflows
 
 ## Try it out
 ### Set up

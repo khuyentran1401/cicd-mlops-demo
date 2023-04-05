@@ -31,4 +31,3 @@ stages:
       - model
     metrics:
       - dvclive/metrics.json
-    
