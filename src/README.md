@@ -24,8 +24,8 @@ Run end-to-end ML training pipeline with Mage.
 
 1. Start Mage:
     ```
-    docker run -it -p 6789:6789 -v $(pwd):/home/src mageai/mageai \
-        /app/run_app.sh mage start src
+    docker run -it -p 6789:6789 -v $(pwd):/home/src -e USER_CODE_PATH=src \
+        mageai/mageai /app/run_app.sh mage start src
     ```
 1. Open your browser and go to: [http://localhost:6789/](http://localhost:6789/)
 
