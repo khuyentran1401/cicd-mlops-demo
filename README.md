@@ -5,9 +5,11 @@ This is a sample project that showcases how to use CI for machine learning model
 ## Why?
 Continuous Integration (CI) is the practice of continuously merging and testing code changes into a shared repository. In a machine learning project, CI can be very useful for several reasons:
 
-- Catching errors early: CI facilitates the early identification of errors by automatically testing any code changes made, enabling timely problem detection during the development phase
-- Ensuring reproducibility: CI helps ensure reproducibility by establishing clear and consistent testing procedures, making it easier to replicate machine learning project results.
-- Faster feedback and decision-making: By providing clear metrics and parameters, CI enables faster feedback and decision-making, freeing up reviewer time for more critical tasks.
+:white_check_mark: **Catching errors early**: CI facilitates the early identification of errors by automatically testing any code changes made, enabling timely problem detection during the development phase
+
+:white_check_mark: **Ensuring reproducibility**: CI helps ensure reproducibility by establishing clear and consistent testing procedures, making it easier to replicate machine learning project results.
+
+:white_check_mark: **Faster feedback and decision-making**: By providing clear metrics and parameters, CI enables faster feedback and decision-making, freeing up reviewer time for more critical tasks.
 
 ## Scenario
 - Data scientists make changes to the code, creating a new model locally.
