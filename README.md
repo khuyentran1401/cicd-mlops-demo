@@ -5,18 +5,16 @@ This is a sample project that showcases how to use CI for machine learning model
 ## Why?
 Continuous Integration (CI) is the practice of continuously merging and testing code changes into a shared repository. In a machine learning project, CI can be very useful for several reasons:
 
-- Catching errors early: With CI, any changes made to the codebase are automatically tested, which helps catch any errors early in the development cycle.
-
-- Ensuring reproducibility: Running tests on the codebase ensures that the codebase is reproducible.
-
-- Facilitating collaboration: With CI, everyone on the team is working with the same codebase, and everyone can see changes made by other team members. This can help prevent conflicts and facilitate collaboration.
+- Catching errors early: CI facilitates the early identification of errors by automatically testing any code changes made, enabling timely problem detection during the development phase
+- Ensuring reproducibility: CI helps ensure reproducibility by establishing clear and consistent testing procedures, making it easier to replicate machine learning project results.
+- Faster feedback and decision-making: By providing clear metrics and parameters, CI enables faster feedback and decision-making, freeing up reviewer time for more critical tasks.
 
 ## Scenario
-- Data scientists make some changes to the code and create a new model locally
-- Data scientists push model and data to a remote storage
-- Data scientists create a pull request for the changes
-- A CI pipeline is kicked off to test the data and model
-- If all tests passed, the code is merged to the main branch
+- Data scientists make changes to the code, creating a new model locally.
+- Data scientists push the new model to remote storage.
+- Data scientists create a pull request for the changes.
+- A CI pipeline is triggered to test the code and model.
+- If all tests pass, the changes are merged into the main branch.
 
 ## CI Pipeline
 - Pull data and model from a remote storage
@@ -56,7 +54,7 @@ dvc pull -r read
 ```
 
 ### Create experiments
-Make changes to any files in the following directories `src`, `tests`, `conf`. To demonstrate, we will make minor changes the file `params.yaml`:
+Make changes to any files in the following directories `src`, `tests`, `params.yaml`. To demonstrate, we will make minor changes the file `params.yaml`:
 
 ![](demo_images/code_change.png)
 
