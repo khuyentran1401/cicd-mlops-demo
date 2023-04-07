@@ -1,3 +1,5 @@
+[![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-red?logo=medium)](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be)
+
 # Continuous Integration for Machine Learning Models
 
 This is a sample project that showcases how to use CI for machine learning models.
