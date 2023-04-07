@@ -23,6 +23,7 @@ def train_model(
     hyperparameters: dict,
     grid_params: dict,
 ) -> GridSearchCV:
+    """Train model using GridSearchCV"""
     grid_search = GridSearchCV(
         pipeline, dict(hyperparameters), **grid_params
     )
@@ -31,11 +32,13 @@ def train_model(
 
 
 def save_model(model, path: str):
+    """Save model to path"""
     Path(path).parent.mkdir(exist_ok=True)
     joblib.dump(model, path)
 
 
 def train() -> None:
+    """Train model and save it"""
     params = dvc.api.params_show()
     with Live(save_dvc_exp=True) as live:
         X_train = load_data(f"{params['data']['intermediate']}/X_train.pkl")

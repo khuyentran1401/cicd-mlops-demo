@@ -4,6 +4,7 @@ from src.train import create_pipeline
 
 
 def test_pipeline():
+    """Test the pipeline's behavior"""
     # Define the pipeline
     pipeline = create_pipeline()
 
