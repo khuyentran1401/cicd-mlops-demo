@@ -7,10 +7,12 @@ from sklearn.metrics import accuracy_score
 
 
 def load_model(path: str):
+    """Load model from path"""
     return joblib.load(path)
 
 
 def evaluate() -> None:
+    """Evaluate model and log metrics"""
     params = dvc.api.params_show()
     with Live(save_dvc_exp=True, resume=True) as live:
         X_test = load_data(f"{params['data']['intermediate']}/X_test.pkl")
