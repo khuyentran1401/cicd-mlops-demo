@@ -2,7 +2,6 @@ name: Test code and app
 on:
   pull_request:
     paths:
-      - conf/**
       - src/**
       - tests/**
       - params.yaml
