@@ -19,15 +19,13 @@ stages:
       - model
       - train
     outs:
-      - model/svm.pkl
+      - model/svm
   evaluate:
     cmd: python src/evaluate.py
     deps:
-      - model
+      - model/svm
       - data/intermediate 
       - src/evaluate.py
     params:
       - data
       - model
-    metrics:
-      - dvclive/metrics.json

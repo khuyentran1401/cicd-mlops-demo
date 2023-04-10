@@ -31,14 +31,14 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/train.py
-      md5: d1fbd3bc6e4e837b92e267f141d08537
-      size: 1586
+      md5: 070c50858ec40fcfe21e361ff56f0b22
+      size: 1466
     params:
       params.yaml:
         data:
           raw: data/raw/winequality-red.csv
           intermediate: data/intermediate
-        model: model/svm.pkl
+        model: model/svm
         train:
           hyperparameters:
             svm__kernel:
@@ -53,13 +53,13 @@ stages:
             - 1
             - 10
           grid_search:
-            cv: 5
+            cv: 2
             scoring: accuracy
             verbose: 3
     outs:
-    - path: model/svm.pkl
-      md5: 4440d727144d62b908b3d1fa3e5a03c6
-      size: 213175
+    - path: model/svm
+      md5: 56a719e06202368c953540a7cb3e37ef
+      size: 142616
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -67,20 +67,15 @@ stages:
       md5: 3377ebd11434a04b64fe3ca5cb3cc455.dir
       size: 194875
       nfiles: 4
-    - path: model
-      md5: 494de735f4a7fab7c96c347f27f5ed0e.dir
-      size: 213175
-      nfiles: 1
+    - path: model/svm
+      md5: 56a719e06202368c953540a7cb3e37ef
+      size: 142616
     - path: src/evaluate.py
-      md5: 97982ab6092095393c7b80e898e1d387
-      size: 799
+      md5: 1f8ae5a6597741d1a8b8223b568d4fb0
+      size: 686
     params:
       params.yaml:
         data:
           raw: data/raw/winequality-red.csv
           intermediate: data/intermediate
-        model: model/svm.pkl
-    outs:
-    - path: dvclive/metrics.json
-      md5: d883d3a4cc9dddb29de51edbbe9cd636
-      size: 24
+        model: model/svm

@@ -1,0 +1,62 @@
+artifacts:
+  data:
+    hash: 56a719e06202368c953540a7cb3e37ef
+    size: 142616
+    uri: svm
+call_orders:
+  predict:
+  - - model
+    - predict
+object_type: model
+processors:
+  model:
+    methods:
+      predict:
+        args:
+        - name: X
+          type_:
+            columns:
+            - ''
+            - fixed acidity
+            - volatile acidity
+            - citric acid
+            - residual sugar
+            - chlorides
+            - free sulfur dioxide
+            - total sulfur dioxide
+            - density
+            - pH
+            - sulphates
+            - alcohol
+            dtypes:
+            - int64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            - float64
+            index_cols:
+            - ''
+            type: dataframe
+        name: predict
+        returns:
+          dtype: int64
+          shape:
+          - null
+          type: ndarray
+        varkw: predict_params
+    type: sklearn_pipeline
+requirements:
+- module: numpy
+  version: 1.24.2
+- module: pandas
+  version: 1.5.3
+- module: sklearn
+  package_name: scikit-learn
+  version: 1.2.2

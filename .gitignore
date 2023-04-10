@@ -2,7 +2,6 @@ outputs
 .hydra
 /scaler
 __pycache__
-/model
 /metrics
 /data_profile
 /.*_cache

@@ -34,17 +34,3 @@ jobs:
 
       - name: Evaluate model
         run: dvc exp run evaluate
-
-      - name: Iterative CML setup
-        uses: iterative/setup-cml@v1
-    
-      - name: Create CML report
-        env:
-          REPO_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-        run: |
-          # Add the metrics to the report
-          dvc metrics show --show-md >> report.md
-          # Add the parameters to the report
-          cat dvclive/params.yaml >> report.md
-          # Create a report in PR
-          cml comment create report.md 

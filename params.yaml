@@ -1,7 +1,7 @@
 data:
   raw: data/raw/winequality-red.csv
   intermediate: data/intermediate
-model: model/svm.pkl
+model: model/svm
 process:
   feature: quality
   test_size: 0.2
@@ -19,6 +19,7 @@ train:
     - 1
     - 10
   grid_search:
-    cv: 5
+    cv: 2
     scoring: accuracy
     verbose: 3
+app: svm-app
