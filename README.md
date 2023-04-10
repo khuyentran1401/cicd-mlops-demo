@@ -40,7 +40,7 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 
 ## Try it out
 ### Set up
-To try out this project, first start with creating a new repository using the template.
+To try out this project, first start with creating a new repository using the project template.
 ![](demo_images/template.png)
 
 Clone the project to your local machine:
