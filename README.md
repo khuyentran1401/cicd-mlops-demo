@@ -89,7 +89,7 @@ Add, commit, and push changes to the repository:
 ```bash
 git add .
 git commit -m 'add 100 for C'
-git push origin main
+git push origin ci-main
 ```
 
 ### Add Encrypted Secrets to GitHub Action
