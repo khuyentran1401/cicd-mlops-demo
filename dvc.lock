@@ -53,14 +53,15 @@ stages:
             - 0.1
             - 1
             - 10
+            - 100
           grid_search:
             cv: 5
             scoring: accuracy
             verbose: 3
     outs:
     - path: model/svm.pkl
-      md5: 7c152501640b849a804c2929a3c02695
-      size: 213903
+      md5: 9e066b5ea21aad8684a675d4a9f67fb9
+      size: 214863
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -69,8 +70,8 @@ stages:
       size: 194875
       nfiles: 4
     - path: model
-      md5: 4d2a1211bc1244ac3fc2be1dcefdbae3.dir
-      size: 213903
+      md5: fa44d836f5f9b2cf7a2f2b006751619f.dir
+      size: 214863
       nfiles: 1
     - path: src/evaluate.py
       md5: 97982ab6092095393c7b80e898e1d387
