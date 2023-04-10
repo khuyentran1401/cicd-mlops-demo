@@ -1,8 +1,10 @@
 name: Test code and app
 on:
-  push:
-    tags:
-      - '*'
+  pull_request:
+    paths:
+      - src/**
+      - tests/**
+      - params.yaml
       
 jobs:
   test_model:
