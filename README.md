@@ -40,15 +40,21 @@ Continuous Integration (CI) is the practice of continuously merging and testing 
 
 ## Try it out
 ### Set up
-To try out this project, first start with cloning the project to your local machine:
+To try out this project, first start with creating a new repository using the template.
+![](demo_images/template.png)
+
+Clone the project to your local machine:
 ```bash
-git clone https://github.com/khuyentran1401/cicd-mlops-demo
+git clone https://github.com/your-username/cicd-mlops-demo
 ```
 
 Set up the environment:
 ```bash
 # Go to the project directory
 cd cicd-mlops-demo
+
+# Create a new branch
+git checkout -b experiment
 
 # Install dependencies
 pip install -r requirements.txt
@@ -89,7 +95,7 @@ Add, commit, and push changes to the repository:
 ```bash
 git add .
 git commit -m 'add 100 for C'
-git push origin main
+git push origin experiment
 ```
 
 ### Add Encrypted Secrets to GitHub Action
