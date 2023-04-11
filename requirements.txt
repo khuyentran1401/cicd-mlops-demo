@@ -140,8 +140,6 @@ distro==1.8.0
     # via
     #   dvc
     #   iterative-telemetry
-docker==6.0.1
-    # via -r requirements.in
 dpath==2.1.5
     # via dvc
 dulwich==0.21.3
@@ -152,6 +150,7 @@ dvc==2.53.0
     # via
     #   -r requirements.in
     #   dvc-s3
+    #   dvclive
 dvc-data==0.47.1
     # via dvc
 dvc-http==2.30.2
@@ -166,6 +165,8 @@ dvc-studio-client==0.6.1
     # via dvc
 dvc-task==0.2.0
     # via dvc
+dvclive==2.6.2
+    # via -r requirements.in
 entrypoints==0.4
     # via mlem
 fastapi==0.95.0
@@ -201,6 +202,7 @@ funcy==2.0
     #   dvc-data
     #   dvc-objects
     #   dvc-task
+    #   dvclive
     #   scmrepo
 gitdb==4.0.10
     # via gitpython
@@ -367,7 +369,6 @@ orjson==3.8.10
     # via sqltrie
 packaging==23.0
     # via
-    #   docker
     #   dvc
     #   hydra-core
     #   ipykernel
@@ -377,7 +378,7 @@ packaging==23.0
     #   plotly
     #   pytest
     #   statsmodels
-pandas==2.0.0
+pandas==1.5.3
     # via
     #   -r requirements.in
     #   category-encoders
@@ -491,7 +492,6 @@ pyzmq==23.2.1
     #   notebook
 requests==2.28.2
     # via
-    #   docker
     #   dvc
     #   dvc-studio-client
     #   fsspec
@@ -506,7 +506,9 @@ rich==13.3.3
     #   dvc
     #   mlem
 ruamel-yaml==0.17.21
-    # via dvc
+    # via
+    #   dvc
+    #   dvclive
 s3fs==2023.4.0
     # via dvc-s3
 s3transfer==0.6.0
@@ -611,12 +613,9 @@ typing-extensions==4.5.0
     #   deepchecks
     #   dvc-objects
     #   pydantic
-tzdata==2023.3
-    # via pandas
 urllib3==1.26.15
     # via
     #   botocore
-    #   docker
     #   dulwich
     #   requests
 uvicorn==0.21.1
@@ -637,9 +636,7 @@ webencodings==0.5.1
     #   bleach
     #   tinycss2
 websocket-client==1.5.1
-    # via
-    #   docker
-    #   jupyter-server
+    # via jupyter-server
 widgetsnbextension==3.6.4
     # via ipywidgets
 wrapt==1.15.0
