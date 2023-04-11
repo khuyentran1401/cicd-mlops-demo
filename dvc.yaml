@@ -31,3 +31,5 @@ stages:
     params:
       - data
       - model
+    metrics:
+      - dvclive/metrics.json

@@ -2,6 +2,7 @@ pandas>=1.5.3
 scikit-learn>=1.2.2
 dvc>=2.51.0
 dvc-s3>=2.21.0
+dvclive>=2.5.1
 pytest>=7.2.2
 deepchecks>=0.13.0
 mlem>=0.4.10

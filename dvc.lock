@@ -31,8 +31,8 @@ stages:
       size: 194875
       nfiles: 4
     - path: src/train.py
-      md5: 070c50858ec40fcfe21e361ff56f0b22
-      size: 1466
+      md5: 9c7de68b1bdc5dae97e849818a7bc1d2
+      size: 1652
     params:
       params.yaml:
         data:
@@ -74,11 +74,15 @@ stages:
       md5: 56a719e06202368c953540a7cb3e37ef
       size: 142616
     - path: src/evaluate.py
-      md5: 1f8ae5a6597741d1a8b8223b568d4fb0
-      size: 686
+      md5: 912aac9c6e00b70858f1d47bd16e51a0
+      size: 803
     params:
       params.yaml:
         data:
           raw: data/raw/winequality-red.csv
           intermediate: data/intermediate
         model: model/svm
+    outs:
+    - path: dvclive/metrics.json
+      md5: 62b3730eec31d2778145d46759a8a45f
+      size: 27
