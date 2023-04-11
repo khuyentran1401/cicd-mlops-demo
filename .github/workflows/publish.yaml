@@ -35,5 +35,4 @@ jobs:
       - name: Deploy model
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          GH_TOKEN: ${{ secrets.TOKEN_GITHUB}}
-        run: mlem deployment run flyio svm-app --model model/svm --app_name svm-mlem
+        run: mlem build --load svm-app.mlem --model model/svm
