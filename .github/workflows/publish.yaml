@@ -8,7 +8,7 @@ on:
         - model/svm.mlem
 
 jobs:
-  run:
+  publish-model:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,10 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Download model
-        run: dvc pull -r read-write
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: dvc pull model/svm -r read-write
 
       - name: Deploy model
         env:
