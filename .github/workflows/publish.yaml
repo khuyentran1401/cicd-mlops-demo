@@ -35,4 +35,4 @@ jobs:
       - name: Deploy model
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: mlem deployment --load svm-app.mlem --model model/svm
+        run: mlem deployment run --load svm-app.mlem --model model/svm
