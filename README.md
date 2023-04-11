@@ -1,41 +1,39 @@
 [![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-red?logo=medium)](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be)
 
-# Continuous Integration for Machine Learning Models
+# CI/CD for Machine Learning Models
 
 This is a sample project for the article [Build Reliable Machine Learning Pipelines with Continuous Integration](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be).
 
 ## Why?
-Continuous Integration (CI) is the practice of continuously merging and testing code changes into a shared repository. In a machine learning project, CI can be very useful for several reasons:
+CI/CD (Continuous Integration/Continuous Deployment) is an essential practice for any software development project, including machine learning projects. It offers several benefits, such as:
 
-:white_check_mark: **Catching errors early**: CI facilitates the early identification of errors by automatically testing any code changes made, enabling timely problem detection during the development phase
+:white_check_mark: **Catching errors early**: CI/CD facilitates the early identification of errors by automatically testing any code changes made, enabling timely problem detection during the development phase
 
-:white_check_mark: **Ensuring reproducibility**: CI helps ensure reproducibility by establishing clear and consistent testing procedures, making it easier to replicate machine learning project results.
+:white_check_mark: **Better code quality**: CI/CD promotes better code quality by ensuring that changes are thoroughly tested before they are merged into the main branch, making it easier to maintain the codebase over time.
 
-:white_check_mark: **Faster feedback and decision-making**: By providing clear metrics and parameters, CI enables faster feedback and decision-making, freeing up reviewer time for more critical tasks.
+:white_check_mark: **Faster time-to-market**: CI/CD automates the build, testing, and deployment process, reducing the time it takes to release new models to production. 
 
 ## Scenario
-- Data scientists make changes to the code, creating a new model locally.
-- Data scientists push the new model to remote storage.
-- Data scientists create a pull request for the changes.
-- A CI pipeline is triggered to test the code and model.
-- If all tests pass, the changes are merged into the main branch.
-
-## CI Pipeline
-- Pull data and model from a remote storage
-- Run tests
-- Automatically generate metrics report
+- Data scientists create and push new model to remote storage.
+- Data scientists create pull request for changes.
+- CI pipeline tests code and model.
+- Changes are merged if all tests pass.
+- Merged changes trigger CD pipeline for model deployment.
 
 ## Tools Used in This Project
 * [DVC](https://dvc.org/): Version data and experiments - [article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0)
-* [CML](https://cml.dev/doc): Post a comment to the pull request showing the metrics and parameters of an experiment
+* [CML](https://cml.dev/): Post a comment to the pull request showing the metrics and parameters of an experiment
+* [MLEM](https://mlem.ai/): Deploy ML models
 
 ## Project Structure
 * `src`: consists of Python scripts
 * `data`: consists of data
 * `tests`: consists of test files
+* `model`: consists of ML models
 * `dvclive`: consists of metrics of DVC experiments
 * `.dvc/config`: consists of locations of the remote storage
 * `params.yaml`: consists of parameters for Python scripts
+* `dvc.yaml`: consists of data processes in the DVC pipeline 
 * `.github/workflows`: consists of GitHub workflows
 
 ## Try it out
@@ -113,8 +111,17 @@ GitHub token is necessary to write metrics and parameters as a comment in your p
 
 ![](demo_images/github_token.png)
 ### Create a Pull Request
-Next, [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+Next, [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
-Once creating a PR, a GitHub workflow will start to run tests. Once all tests passed, a comment will appear in the PR with the metrics and parameters of the new experiment. 
+The PR will trigger the CI pipeline to run tests. Once all tests passed, a comment will appear in the PR with the metrics and parameters of the new experiment. 
 
 ![](demo_images/pr.png)
+
+### Deploy the Model
+Once the changes are merged, a CD pipeline will be triggered to deploy the ML model. Click the link under the "Deploy model" step to interact with the model. 
+
+![](demo_images/deploy_model.png)
+
+Click "Try it out" to try out the model on a sample dataset.
+
+![](demo_images/fastapi.gif)
