@@ -92,7 +92,7 @@ Add, commit, and push changes to the repository:
 
 ```bash
 git add .
-git commit -m 'add 100 for C'
+git commit -m 'change svm kernel'
 git push origin experiment
 ```
 
