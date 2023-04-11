@@ -6,4 +6,5 @@ pytest>=7.2.2
 deepchecks>=0.13.0
 mlem>=0.4.10
 fastapi>=0.95.0
+uvicorn>=0.21.1
 docker>=6.0.1
