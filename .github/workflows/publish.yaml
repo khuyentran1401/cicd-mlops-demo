@@ -1,11 +1,11 @@
-name: publish-my-model
+name: publish-model
 
 on:
   push:
     branches:
         - cd-main
     paths:
-        - svm-app.mlem.state
+        - model/svm.mlem
 
 jobs:
   run:
@@ -27,6 +27,8 @@ jobs:
         run: dvc pull -r read-write
 
       - name: Deploy model
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
           mlem deployment run flyio svm-app \
           --model model/svm \

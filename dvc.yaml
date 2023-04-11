@@ -20,6 +20,8 @@ stages:
       - train
     outs:
       - model/svm
+      - model/svm.mlem:
+          cache: false
   evaluate:
     cmd: python src/evaluate.py
     deps:

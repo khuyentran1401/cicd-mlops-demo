@@ -5,3 +5,7 @@ clean:
 ## Create requirements.txt from requirements.in
 requirements.txt: requirements.in
 	pip-compile requirements.in --resolver=backtracking
+
+## Specify how to deploy the model
+svm-app.mlem: 
+	mlem declare deployment flyio svm-app --app_name=svm-mlem  
