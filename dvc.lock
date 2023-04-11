@@ -43,6 +43,7 @@ stages:
           hyperparameters:
             svm__kernel:
             - linear
+            - rbf
             svm__C:
             - 0.1
             - 1
@@ -57,10 +58,10 @@ stages:
             verbose: 3
     outs:
     - path: model/svm
-      md5: ba0c50b412f6b5d5c5bd6c0ef163b1a1
-      size: 148163
+      md5: 56a719e06202368c953540a7cb3e37ef
+      size: 142616
     - path: model/svm.mlem
-      md5: 3e7f2947de87d4500fb0dff8c1311555
+      md5: b562c8482a0cb77f10bf8b14bf65f548
       size: 1263
   evaluate:
     cmd: python src/evaluate.py

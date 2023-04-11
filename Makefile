@@ -12,7 +12,7 @@ svm-app.mlem:
 
 # Create and version an experiment
 experiment:
-	dvc experiment run train
+	dvc exp run train
 	git add .
 	git commit -m 'Change model'
 	git push origin cd-main 
