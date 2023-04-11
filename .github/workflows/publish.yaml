@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: 3.8
       
+      - name: Setup flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      
       - name: Install dependencies
         run: pip install -r requirements.txt
 
