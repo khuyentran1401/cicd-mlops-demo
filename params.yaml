@@ -9,7 +9,6 @@ train:
   hyperparameters:
     svm__kernel:
     - linear
-    - rbf
     svm__C:
     - 0.1
     - 1
