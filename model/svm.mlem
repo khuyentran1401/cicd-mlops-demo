@@ -1,7 +1,7 @@
 artifacts:
   data:
-    hash: ba0c50b412f6b5d5c5bd6c0ef163b1a1
-    size: 148163
+    hash: 56a719e06202368c953540a7cb3e37ef
+    size: 142616
     uri: svm
 call_orders:
   predict:
