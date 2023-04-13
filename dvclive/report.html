@@ -22,10 +22,10 @@
             <div style="display: flex;justify-content: center;">
                 <table>
 <thead>
-<tr><th>Best hyperparameters                                      </th></tr>
+<tr><th>Best hyperparameters                                  </th></tr>
 </thead>
 <tbody>
-<tr><td>{&#x27;svm__C&#x27;: 10, &#x27;svm__gamma&#x27;: 0.1, &#x27;svm__kernel&#x27;: &#x27;linear&#x27;}</td></tr>
+<tr><td>{&#x27;svm__C&#x27;: 1, &#x27;svm__gamma&#x27;: 0.1, &#x27;svm__kernel&#x27;: &#x27;rbf&#x27;}</td></tr>
 </tbody>
 </table>
             </div>
@@ -39,7 +39,7 @@
 <tr><th style="text-align: right;">  accuracy</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align: right;">  0.559375</td></tr>
+<tr><td style="text-align: right;">   0.60625</td></tr>
 </tbody>
 </table>
             </div>
@@ -47,7 +47,7 @@
 
     <div id = "static_accuracy">
         <script type = "text/javascript">
-            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "accuracy": "0.559375", "rev": "workspace"}]}, "title": "accuracy", "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "layer": [{"mark": "line", "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "accuracy", "type": "quantitative", "title": "accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "accuracy", "on": "step", "groupby": ["rev", "filename", "field", "filename::field"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "point", "tooltip": {"content": "data"}}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "accuracy", "type": "quantitative", "title": "accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}]};
+            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "accuracy": "0.60625", "rev": "workspace"}]}, "title": "accuracy", "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "layer": [{"mark": "line", "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "accuracy", "type": "quantitative", "title": "accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "accuracy", "on": "step", "groupby": ["rev", "filename", "field", "filename::field"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "point", "tooltip": {"content": "data"}}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "accuracy", "type": "quantitative", "title": "accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}]};
             vegaEmbed('#static_accuracy', spec);
         </script>
     </div>
