@@ -20,9 +20,6 @@ jobs:
         with:
           python-version: 3.8
       
-      - name: Setup flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@master
-      
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -32,6 +29,9 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: dvc pull model/svm -r read-write
 
+      - name: Setup flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        
       - name: Deploy model
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

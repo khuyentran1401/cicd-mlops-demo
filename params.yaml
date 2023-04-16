@@ -21,4 +21,3 @@ train:
     cv: 2
     scoring: accuracy
     verbose: 3
-app: svm-app

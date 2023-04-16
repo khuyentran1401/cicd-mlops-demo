@@ -29,10 +29,10 @@ def train_model(
     return grid_search
 
 
-def save_model(model, path: str, data: pd.DataFrame):
+def save_model(model, path: str, X_train: pd.DataFrame):
     """Save model to path"""
     Path(path).parent.mkdir(exist_ok=True)
-    save(model, path, sample_data=data)
+    save(model, path, sample_data=X_train)
 
 
 def train() -> None:
