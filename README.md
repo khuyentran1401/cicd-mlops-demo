@@ -3,9 +3,13 @@
 CI/CD for Machine Learning Models
  </h3>
   
-[![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-blue?logo=medium)](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be) [![View on YouTube](https://img.shields.io/badge/YouTube-Watch%20on%20Youtube-red?logo=youtube)]([https://www.youtube.com/channel/UCNMawpMow-lW5d2svGhOEbw](https://youtu.be/rkg09nNMAhs)) 
+[![View on YouTube](https://img.shields.io/badge/YouTube-Watch%20on%20Youtube-red?logo=youtube)]([https://www.youtube.com/channel/UCNMawpMow-lW5d2svGhOEbw](https://youtu.be/rkg09nNMAhs)) 
 
-Sample project for [Build Reliable Machine Learning Pipelines with Continuous Integration](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be).
+Sample project for:
+
+[Build Reliable Machine Learning Pipelines with Continuous Integration](https://towardsdatascience.com/build-reliable-machine-learning-pipelines-with-continuous-integration-ea822eb09bf6?sk=ae3326395e0c5bb219523a1c2014b1be)
+
+[Automate Machine Learning Deployment with GitHub Actions](https://towardsdatascience.com/automate-machine-learning-deployment-with-github-actions-f752766981b1?sk=6e234bb505e6bc426bb4760e4b20da1b)
 
 </div> 
   
