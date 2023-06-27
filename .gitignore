@@ -13,3 +13,5 @@ data/intermediate
 data/final
 venv
 .DS_Store
+env/
+aws-creds
