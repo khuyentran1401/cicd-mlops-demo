@@ -10,13 +10,13 @@ train:
     svm__kernel:
     - linear
     svm__C:
-    - 0.1
+    - 0.5
     - 1
     - 10
     svm__gamma:
     - 0.1
     - 1
-    - 10
+    - 9
   grid_search:
     cv: 2
     scoring: accuracy

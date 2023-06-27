@@ -4,4 +4,4 @@
 ['remote "read"']
     url = https://winequality-red.s3.amazonaws.com/
 ['remote "read-write"']
-    url = s3://winequality-red/
+    url = s3://mlops-data-demo/
